@@ -1,0 +1,1155 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#07111f">
+<title>J.A.R.V.I.S. — Android Edition v2.5.2</title>
+<style>
+:root{color-scheme:dark;--bg:#07111d;--panel:#0d1b2b;--panel2:#10253a;--panel3:#081725;--line:rgba(131,190,226,.17);--cyan:#69dff5;--blue:#338bbd;--text:#eff7ff;--muted:#92aabd;--green:#73dfb2;--red:#ff929e;--gold:#e4c18b;--shadow:0 18px 48px rgba(0,0,0,.25)}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:radial-gradient(ellipse at 10% 0%,#12304a 0,transparent 34%),radial-gradient(ellipse at 94% 12%,#10263d 0,transparent 30%),var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}body{padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}button,input,textarea,select{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}.app{width:min(1440px,100%);margin:0 auto;padding:17px 20px 30px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:5px 0 16px;border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:11px}.mark{width:45px;height:45px;border-radius:15px;display:grid;place-items:center;border:1px solid rgba(105,223,245,.45);background:linear-gradient(145deg,#173f5b,#0a1b2c);box-shadow:0 0 24px rgba(70,194,230,.13)}.mark svg{width:29px;height:29px;stroke:var(--cyan);fill:none;stroke-width:1.5}.brand h1{margin:0;font-size:15px;letter-spacing:.19em;font-weight:850}.brand p{margin:4px 0 0;color:var(--muted);font-size:9px;letter-spacing:.17em}.status{display:flex;align-items:center;gap:8px;color:var(--green);font-size:10px;letter-spacing:.13em}.dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green)}.hero{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;padding:23px 2px 18px}.eyebrow{color:var(--cyan);font-size:9px;letter-spacing:.22em;text-transform:uppercase}.hero h2{margin:7px 0 5px;font-size:clamp(21px,4vw,31px);letter-spacing:.015em}.hero p{margin:0;color:var(--muted);font-size:12px}.clock{text-align:right;color:var(--muted);font-size:11px;line-height:1.65;white-space:nowrap}.clock strong{display:block;color:var(--text);font-size:20px;font-variant-numeric:tabular-nums;letter-spacing:.06em}.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:15px}.metric{min-width:0;padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:linear-gradient(145deg,rgba(17,42,64,.9),rgba(8,23,37,.92))}.metric label{display:block;color:var(--muted);font-size:9px;letter-spacing:.13em;text-transform:uppercase}.metric strong{display:block;margin-top:6px;font-size:15px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.layout{display:grid;grid-template-columns:190px minmax(0,1fr);gap:14px;align-items:start}.nav{position:sticky;top:12px;padding:9px;border:1px solid var(--line);border-radius:17px;background:rgba(8,24,39,.92)}.nav button{width:100%;display:flex;align-items:center;gap:10px;padding:12px 11px;margin:2px 0;border:0;border-radius:11px;background:transparent;color:var(--muted);font-size:12px;text-align:left}.nav button.active{color:var(--cyan);background:linear-gradient(90deg,rgba(58,151,195,.2),rgba(58,151,195,.04));box-shadow:inset 2px 0 var(--cyan)}.nav .ico{width:21px;text-align:center;font-size:15px}.nav-note{margin-top:9px;padding:12px 8px 4px;border-top:1px solid var(--line);color:#6f8ba0;font-size:9px;line-height:1.6}.main{min-width:0}.view{display:none}.view.active{display:block}.panel{overflow:hidden;border:1px solid var(--line);border-radius:18px;background:linear-gradient(145deg,rgba(14,31,49,.98),rgba(8,22,36,.98));box-shadow:var(--shadow)}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:15px 17px;border-bottom:1px solid var(--line)}.panel-head h3{margin:0;font-size:12px;letter-spacing:.12em}.panel-head small{display:block;margin-top:4px;color:var(--muted);font-size:10px}.head-actions{display:flex;align-items:center;gap:8px}.badge{display:inline-flex;align-items:center;justify-content:center;padding:5px 8px;border:1px solid rgba(115,223,178,.23);border-radius:20px;color:var(--green);font-size:9px;letter-spacing:.08em;white-space:nowrap}.select-compact{width:auto;max-width:175px;background:#0a1b2b}.chat-body{height:min(57vh,620px);min-height:300px;overflow:auto;display:flex;flex-direction:column;gap:12px;padding:15px;scroll-behavior:smooth}.empty{max-width:340px;margin:auto;padding:22px;text-align:center;color:var(--muted)}.orb{display:grid;place-items:center;width:72px;height:72px;margin:0 auto 14px;border:1px solid rgba(105,223,245,.43);border-radius:50%;color:var(--cyan);font-size:27px;box-shadow:0 0 35px rgba(54,183,226,.13),inset 0 0 20px rgba(54,183,226,.1)}.empty strong{display:block;margin-bottom:6px;color:var(--text);font-size:14px}.empty p{font-size:11px;line-height:1.6}.msg{max-width:88%;padding:11px 13px;border:1px solid var(--line);border-radius:14px;font-size:13px;line-height:1.58;white-space:pre-wrap;overflow-wrap:anywhere}.msg.assistant{align-self:flex-start;background:#102a40;border-top-left-radius:5px}.msg.user{align-self:flex-end;background:#16435f;border-top-right-radius:5px}.msg.error{border-color:rgba(255,146,158,.35);background:rgba(75,23,38,.35)}.msg-tag{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px;color:var(--cyan);font-size:9px;letter-spacing:.13em;text-transform:uppercase}.msg.user .msg-tag{color:#b9e6f7}.speak-one{padding:2px 4px;border:0;background:transparent;color:var(--cyan);font-size:10px}.composer{display:flex;align-items:flex-end;gap:8px;padding:12px;border-top:1px solid var(--line)}.composer-field{display:flex;flex-direction:column;gap:7px}.composer-extra{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.web-toggle{display:inline-flex;align-items:center;gap:5px;color:var(--muted);font-size:10px}.web-toggle input{accent-color:var(--cyan)}.image-preview{display:flex;align-items:center;gap:10px;padding:0 12px 12px;color:var(--muted);font-size:10px}.image-preview img{width:66px;height:66px;object-fit:cover;border:1px solid var(--line);border-radius:10px}.image-preview button{margin-left:auto}.msg-image{display:block;max-width:min(240px,100%);max-height:220px;object-fit:contain;border-radius:10px;margin-top:7px;border:1px solid var(--line)}.msg-sources{display:flex;flex-direction:column;gap:5px;margin-top:9px;padding-top:8px;border-top:1px solid var(--line);font-size:10px}.msg-sources a{color:var(--cyan);text-decoration:none;overflow-wrap:anywhere}.msg-sources a:hover{text-decoration:underline}.composer textarea{min-height:44px;max-height:150px;resize:none}.composer-field{flex:1;min-width:0}.compose-tools{display:flex;gap:6px}.field{width:100%;min-width:0;padding:10px 11px;border:1px solid rgba(131,190,226,.22);border-radius:11px;background:#071725;color:var(--text);outline:none;font-size:12px}.field:focus{border-color:rgba(105,223,245,.65);box-shadow:0 0 0 3px rgba(105,223,245,.07)}.field::placeholder{color:#617e93}.field option{background:#0d1b2b}.label{display:block;margin:11px 0 6px;color:#a9c2d5;font-size:9px;letter-spacing:.12em;text-transform:uppercase}.btn{padding:9px 13px;border:1px solid rgba(105,223,245,.28);border-radius:10px;background:linear-gradient(145deg,#174766,#10324e);color:#eafaff;font-size:11px;font-weight:750;white-space:nowrap}.btn:hover{filter:brightness(1.12)}.btn.secondary{border-color:var(--line);background:#102235;color:#c0d0dc}.btn.ghost{border-color:var(--line);background:transparent;color:var(--muted)}.btn.danger{border-color:rgba(255,146,158,.27);background:rgba(80,24,40,.23);color:var(--red)}.btn:disabled{opacity:.5;cursor:wait}.hint{padding:0 14px 12px;color:#7892a7;font-size:9px;line-height:1.55}.section-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:13px}.card{min-width:0;padding:14px;border:1px solid var(--line);border-radius:14px;background:rgba(5,19,31,.58)}.card h4{margin:0 0 6px;font-size:12px}.card p{margin:0 0 11px;color:var(--muted);font-size:10px;line-height:1.55}.form-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.field-wrap{min-width:0}.toggle{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 0;color:#c7d8e5;font-size:11px}.toggle input{width:17px;height:17px;accent-color:var(--cyan)}.note{margin-top:10px;padding:10px 11px;border:1px solid rgba(105,223,245,.15);border-radius:11px;background:rgba(24,63,88,.17);color:#a9c7da;font-size:10px;line-height:1.55}.note.warn{border-color:rgba(228,193,139,.2);background:rgba(99,68,22,.12);color:#e6cda5}.provider-order{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}.provider-chip{padding:5px 8px;border:1px solid var(--line);border-radius:20px;background:#0a2031;color:var(--cyan);font-size:9px}.test-row{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-top:12px}.result{color:var(--muted);font-size:10px;line-height:1.5}.profile-line{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 10px;border:1px solid var(--line);border-radius:10px;background:#091b2a;font-size:10px}.profile-line strong{color:var(--cyan)}.tool-toolbar{display:grid;grid-template-columns:minmax(0,1fr) 180px;gap:8px;padding:13px 14px 0}.category-row{display:flex;gap:6px;overflow:auto;padding:10px 14px;scrollbar-width:thin}.category-btn{padding:6px 10px;border:1px solid var(--line);border-radius:20px;background:#0a1b2a;color:var(--muted);font-size:9px;white-space:nowrap}.category-btn.active{border-color:rgba(105,223,245,.45);background:rgba(55,140,180,.18);color:var(--cyan)}.tool-count{padding:0 14px 4px;color:var(--muted);font-size:9px}.tool-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:9px 14px 14px}.tool{min-width:0;padding:11px;border:1px solid var(--line);border-radius:12px;background:rgba(7,22,36,.66)}.tool strong{display:block;font-size:11px}.tool small{display:block;min-height:30px;margin:5px 0 8px;color:var(--muted);font-size:9px;line-height:1.45}.tool-meta{display:flex;align-items:center;justify-content:space-between;gap:8px}.tool-tag{color:var(--cyan);font-size:8px;letter-spacing:.1em;text-transform:uppercase}.tool button{padding:6px 9px;font-size:9px}.tool-runner{padding:14px;border-top:1px solid var(--line);background:rgba(5,17,28,.5)}.tool-runner-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}.tool-runner h4{margin:0;font-size:12px}.tool-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.tool-input{min-width:0}.tool-input.full{grid-column:1/-1}.tool-input textarea{min-height:80px;resize:vertical}.output{min-height:40px;max-height:300px;overflow:auto;margin-top:10px;padding:11px;border:1px solid var(--line);border-radius:10px;background:#051522;color:#cce8f5;font:10px/1.6 ui-monospace,SFMono-Regular,monospace;white-space:pre-wrap;overflow-wrap:anywhere}.advanced{margin-top:10px;color:var(--muted);font-size:10px}.advanced summary{cursor:pointer;padding:6px 0}.advanced textarea{min-height:100px;font-family:ui-monospace,monospace}.footer{padding:16px 0 2px;color:#58758b;text-align:center;font-size:9px}.hidden{display:none!important}.toast{position:fixed;z-index:20;left:50%;bottom:20px;max-width:calc(100% - 30px);transform:translateX(-50%);padding:10px 14px;border:1px solid rgba(105,223,245,.35);border-radius:12px;background:#102a40;color:#e9f8ff;font-size:11px;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:opacity .2s}.toast.show{opacity:1}.busy{display:inline-flex;align-items:center;gap:7px}.spin{width:11px;height:11px;border:2px solid rgba(105,223,245,.2);border-top-color:var(--cyan);border-radius:50%;animation:spin .7s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+
+/* v2.1.0 Studio and subagent additions */
+.studio-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:13px}
+.studio-output{margin-top:10px;padding:10px;border:1px solid var(--line);border-radius:12px;background:#061522;color:#c6d8e5;font-size:10px;line-height:1.5;overflow-wrap:anywhere}
+.studio-output img{display:block;max-width:100%;max-height:520px;object-fit:contain;margin:8px auto;border-radius:12px}
+.agent-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}
+.agent-option{display:flex;align-items:flex-start;gap:8px;padding:10px;border:1px solid var(--line);border-radius:11px;background:#081a29;font-size:10px}
+.agent-option input{margin-top:2px;accent-color:var(--cyan)}
+.agent-option strong{display:block;color:var(--text);margin-bottom:3px}
+.agent-option small{display:block;color:var(--muted);line-height:1.4}
+.agent-result{padding:11px;border:1px solid var(--line);border-radius:11px;background:#081a29;margin-top:8px;font-size:11px;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere}
+.agent-result strong{display:block;color:var(--cyan);margin-bottom:5px}
+.qr-preview{width:210px;max-width:100%;background:white;padding:8px;border-radius:8px;image-rendering:pixelated}
+@media(max-width:760px){.studio-grid,.agent-list{grid-template-columns:1fr}.layout{grid-template-columns:1fr}.nav{position:sticky;top:0;z-index:10;display:flex;overflow:auto;gap:4px;padding:6px}.nav button{width:auto;min-width:max-content;padding:10px}.nav-note{display:none}.app{padding:10px 10px 24px}.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.tool-toolbar{grid-template-columns:minmax(0,1fr)}.tool-list{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}.head-actions{flex-wrap:wrap}.chat-body{height:55vh;min-height:260px}.msg{max-width:96%}}
+
+@media(max-width:820px){.app{padding:12px 11px 24px}.layout{grid-template-columns:1fr}.nav{position:sticky;top:0;z-index:10;display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:5px;background:rgba(7,18,30,.96);backdrop-filter:blur(10px)}.nav button{justify-content:center;padding:10px 4px;font-size:10px;gap:6px}.nav .ico{width:auto}.nav-note{display:none}.section-grid{grid-template-columns:1fr}.chat-body{height:54vh;min-height:290px}.metrics{grid-template-columns:repeat(2,1fr)}.hero{padding-top:17px}.tool-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:480px){.brand h1{font-size:13px}.brand p{font-size:8px}.status{font-size:8px}.status .status-label{display:none}.hero h2{font-size:21px}.hero p{font-size:10px}.clock strong{font-size:16px}.clock{font-size:9px}.metric{padding:10px}.metric strong{font-size:13px}.panel-head{padding:12px}.head-actions{gap:5px}.select-compact{max-width:132px;font-size:10px;padding:8px 7px}.chat-body{padding:11px}.msg{max-width:95%;font-size:12px}.composer{padding:9px}.compose-tools{gap:5px}.btn{padding:9px 10px}.tool-list{grid-template-columns:1fr}.tool-toolbar{grid-template-columns:1fr}.form-row,.tool-form{grid-template-columns:1fr}.tool-input.full{grid-column:auto}}
+
+/* v2.1.0 mobile polish */
+.tool{transition:transform .16s ease,border-color .16s ease,background .16s ease}
+.tool:active{transform:scale(.99)}
+.tool:hover{border-color:rgba(105,223,245,.34);background:rgba(15,42,62,.9)}
+.tool-toolbar{position:sticky;top:0;z-index:5;background:rgba(8,22,36,.96);backdrop-filter:blur(12px);padding-bottom:9px;border-bottom:1px solid var(--line)}
+.tool-runner{scroll-margin-top:84px}
+.tool-output-media{display:block;max-width:100%;max-height:360px;object-fit:contain;margin:12px auto;border:1px solid var(--line);border-radius:12px;background:#fff}
+.tool-download{display:inline-flex;margin:8px 0;padding:9px 12px;border-radius:10px;background:#174766;color:#eafaff;text-decoration:none;font-size:11px}
+.category-row{scroll-snap-type:x proximity}.category-btn{scroll-snap-align:start}
+.key-storage-card{border-color:rgba(105,223,245,.28);background:linear-gradient(145deg,rgba(20,52,76,.7),rgba(5,19,31,.6))}
+@media(min-width:1100px){.tool-list{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:820px){.tool-toolbar{top:46px}.nav{box-shadow:0 8px 22px rgba(0,0,0,.18)}}
+@media(max-width:480px){.app{padding-left:8px;padding-right:8px}.panel{border-radius:14px}.panel-head h3{font-size:11px}.tool-toolbar{grid-template-columns:1fr;top:44px}.category-row{padding-top:8px;padding-bottom:8px}.tool-runner{padding:12px}.tool-form{gap:10px}.tool-input .field{font-size:16px}.key-storage-card .test-row{align-items:stretch}.key-storage-card .test-row .btn{flex:1}}
+
+.provider-list{display:flex;flex-direction:column;gap:8px}.router-provider{padding:10px;border:1px solid var(--line);border-radius:11px;background:#081a29}.router-provider-top{display:flex;justify-content:space-between;align-items:center;gap:8px}.router-provider small{display:block;color:var(--muted);font-size:9px;margin-top:4px;overflow-wrap:anywhere}.router-provider-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.tier-pill{display:inline-block;padding:3px 6px;border-radius:20px;background:rgba(105,223,245,.1);color:var(--cyan);font-size:9px}.agent-option small{display:block}.agent-option{min-width:0}.agent-option strong{display:block}.agent-list{max-height:430px;overflow:auto}.gateway-code{font-family:ui-monospace,monospace;font-size:11px;overflow-wrap:anywhere}
+@media(max-width:820px){.layout{grid-template-columns:1fr}.nav{display:flex;position:sticky;top:0;z-index:5;overflow:auto;gap:4px;padding:6px;backdrop-filter:blur(15px)}.nav button{width:auto;flex:0 0 auto;margin:0;padding:10px 11px}.nav-note{display:none}.metrics{grid-template-columns:repeat(2,1fr)}.section-grid{grid-template-columns:1fr}.clock{display:none}}
+
+.router-model-row{display:flex;gap:8px;align-items:center;margin-top:10px}.router-model-row .field{flex:1;min-width:0;margin:0}.router-model-row .btn{white-space:nowrap}
+@media(max-width:520px){.router-model-row{flex-direction:column;align-items:stretch}.router-model-row .btn{width:100%}}
+
+/* v2.5.2 Intelligence & Operations workspace */
+.ops-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:13px}
+.ops-card{min-width:0}.ops-card h4{margin:0 0 6px}.ops-card p{font-size:11px;line-height:1.55;color:var(--muted);margin:0 0 10px}
+.ops-list{margin-top:10px;display:grid;gap:7px;max-height:260px;overflow:auto}
+.ops-item{padding:9px 10px;border:1px solid var(--line);border-radius:10px;background:#071827;font-size:10px;line-height:1.5;overflow-wrap:anywhere}
+.ops-item strong{color:var(--cyan);display:block;margin-bottom:3px}
+.ops-item pre{white-space:pre-wrap;overflow-wrap:anywhere;max-height:180px;overflow:auto;color:#d7e6f3;margin:6px 0}
+.ops-item a{color:var(--cyan)}.ops-item .btn{margin:5px 5px 0 0}
+.ops-camera{width:100%;max-height:300px;object-fit:cover;border-radius:12px;border:1px solid var(--line);background:#02080f;margin:6px 0}
+.ops-grid .label{display:block;margin:9px 0 5px}
+@media(max-width:820px){.ops-grid{grid-template-columns:1fr}.ops-grid .card{grid-column:1!important}}
+
+
+/* v2.5.2 Ecosystem workspace */
+.eco-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:13px}
+.eco-card{min-width:0}.eco-card h4{margin:0 0 6px}.eco-card p{font-size:11px;line-height:1.55;color:var(--muted);margin:0 0 10px}
+.eco-list{display:grid;gap:7px;max-height:260px;overflow:auto;margin-top:10px}
+.eco-item{padding:9px 10px;border:1px solid var(--line);border-radius:10px;background:#071827;font-size:11px;line-height:1.5;overflow-wrap:anywhere}
+.eco-item strong{display:block;color:var(--cyan);margin-bottom:3px}.eco-item .btn{margin:5px 5px 0 0}
+.eco-node-toolbar{display:flex;gap:8px;align-items:center;margin:9px 0}.eco-node-toolbar .field{flex:1;min-width:0}
+.eco-nodes{display:grid;gap:8px;margin:9px 0}.eco-node{border:1px solid var(--line);background:#071827;border-radius:10px;padding:10px}
+.eco-node-head{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:7px}.eco-node-head strong{color:var(--cyan);font-size:11px}
+.eco-node textarea,.eco-node input{font-size:11px}.eco-diff{white-space:pre-wrap;overflow:auto;max-height:220px;padding:10px;background:#06111c;border:1px solid var(--line);border-radius:10px;font-size:10px;line-height:1.5;color:#c9d8e6}
+.eco-device-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.eco-pair-code{font-size:30px;letter-spacing:9px;font-weight:800;color:var(--cyan);padding:14px 0}
+@media(max-width:820px){.eco-grid{grid-template-columns:1fr}.eco-grid .card{grid-column:1!important}}
+@media(max-width:520px){.eco-device-grid{grid-template-columns:1fr}.eco-node-toolbar{flex-direction:column;align-items:stretch}}
+
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand"><div class="mark"><svg viewBox="0 0 32 32"><path d="M16 3 27 9v14l-11 6L5 23V9z"/><path d="M11 12h10M11 16h10M13 20h6"/><circle cx="16" cy="8" r="1.4" fill="currentColor" stroke="none"/></svg></div><div><h1>J.A.R.V.I.S.</h1><p>PERSONAL ASSISTANT SYSTEM</p></div></div>
+    <div class="status"><i class="dot"></i><span id="systemStatus">CONNECTING</span><span class="status-label">· LOCAL SERVER</span></div>
+  </header>
+  <section class="hero"><div><div class="eyebrow">ANDROID EDITION · v2.5.2</div><h2>Systems online.</h2><p>Your assistant, voice profiles and local tools.</p></div><div class="clock"><strong id="clockTime">--:--:--</strong><span id="clockDate">Loading local time…</span></div></section>
+  <section class="metrics">
+    <div class="metric"><label>Active assistant</label><strong id="metricPersona">J.A.R.V.I.S.</strong></div>
+    <div class="metric"><label>Speech profile</label><strong id="metricSpeech">Auto · British</strong></div>
+    <div class="metric"><label>Local tools</label><strong id="metricTools">—</strong></div>
+    <div class="metric"><label>Server uptime</label><strong id="metricUptime">—</strong></div>
+  </section>
+  <div class="layout">
+    <nav class="nav" aria-label="Main navigation">
+      <button class="active" data-view="chat"><span class="ico">⌘</span>Command</button>
+      <button data-view="studio"><span class="ico">✦</span>Studio</button>
+      <button data-view="agents"><span class="ico">◈</span>Agents</button>
+      <button data-view="operations"><span class="ico">◎</span>Operations</button>
+      <button data-view="router"><span class="ico">⇄</span>Omni Router</button>
+      <button data-view="voice"><span class="ico">◖</span>Voice & AI</button>
+      <button data-view="tools"><span class="ico">▦</span>Tools</button>
+      <button data-view="ecosystem"><span class="ico">✧</span>Ecosystem</button>
+      <button data-view="bdfd"><span class="ico">⇄</span>Discord / BDFD</button>
+      <button id="selfUpgradeNavBtn" type="button"><span class="ico">⟳</span>Self-upgrade</button>
+      <div class="nav-note">Local tools run on this phone. Cloud services need internet and provider credentials. Face analysis is non-identifying only. Self-upgrades are saved outside the app folder.</div>
+    </nav>
+    <main class="main">
+      <section id="view-chat" class="view active panel">
+        <div class="panel-head"><div><h3>COMMAND INTERFACE</h3><small id="chatSubtitle">Omni routing, tool calling, image analysis and automatic provider fallback</small></div><div class="head-actions"><select class="field select-compact" id="persona" aria-label="Assistant persona"><option>J.A.R.V.I.S.</option><option>F.R.I.D.A.Y.</option><option>E.D.I.T.H.</option><option>Professional</option><option>Friendly</option></select><button class="btn ghost" id="clearChatBtn" title="Clear conversation">Clear</button></div></div>
+        <div class="chat-body" id="chatBody"><div class="empty" id="emptyState"><div class="orb">✧</div><strong>At your service.</strong><p>Choose an assistant, connect your AI provider in Voice & AI, then send a message. Use the microphone to dictate when your browser supports it.</p></div></div>
+        <div class="composer"><div class="composer-field"><textarea class="field" id="messageInput" rows="1" placeholder="Ask anything, attach an image, or search the web…"></textarea><div class="composer-extra"><label class="btn secondary" for="imageInput">Attach image</label><input id="imageInput" type="file" accept="image/*" capture="environment" hidden><label class="web-toggle"><input type="checkbox" id="webSearchToggle"> Search live web</label><label class="web-toggle"><input type="checkbox" id="aiToolsToggle" checked> Let AI use all JARVIS tools</label></div></div><div class="compose-tools"><button class="btn secondary" id="micBtn" title="Voice input" aria-label="Voice input">⌁</button><button class="btn" id="sendBtn">Send</button></div></div>
+        <div class="image-preview hidden" id="imagePreview"><img id="imagePreviewThumb" alt="Selected image preview"><span id="imagePreviewName">Image attached</span><button class="btn ghost" id="removeImageBtn" type="button">Remove</button></div>
+        <div class="hint">Attach a photo or screenshot for image analysis. Enable Search live web for current information. Vision requires a model that supports image input.</div>
+      </section>
+
+      <section id="view-voice" class="view panel">
+        <div class="panel-head"><div><h3>VOICE & AI SETTINGS</h3><small>Separate chat model and speech providers</small></div><span class="badge">PERSONA AWARE</span></div>
+        <div class="section-grid">
+          <div class="card key-storage-card">
+            <h4>Saved API keys on this phone</h4><p>Remember provider keys in this browser so you do not have to paste them after every refresh.</p>
+            <label class="toggle"><span>Remember API keys on this device</span><input type="checkbox" id="rememberKeys" checked></label>
+            <div class="test-row"><button class="btn" id="saveKeysBtn" type="button">Save keys now</button><button class="btn danger" id="clearKeysBtn" type="button">Clear saved keys</button><span class="result" id="keysStatus">Not saved yet.</span></div>
+            <div class="note warn">Keys are saved in this browser’s local storage on this phone. They are not encrypted. Anyone with access to this browser profile may be able to use them. Do not enable this on a shared device.</div>
+          </div>
+          <div class="card">
+            <h4>Persona voice profiles</h4><p>Each assistant has a different delivery and British neural voice. Selecting a persona in Command updates these profiles automatically.</p>
+            <div class="profile-line"><span>J.A.R.V.I.S.</span><strong>Ryan · composed male</strong></div>
+            <div class="profile-line" style="margin-top:7px"><span>F.R.I.D.A.Y.</span><strong>Sonia · warm female</strong></div>
+            <div class="profile-line" style="margin-top:7px"><span>E.D.I.T.H.</span><strong>Libby · precise female</strong></div>
+            <div class="note" id="voiceProfileStatus">Current profile: J.A.R.V.I.S. · British English</div>
+            <label class="toggle"><span>Speak new replies automatically</span><input type="checkbox" id="autoSpeak" checked></label>
+            <label class="toggle"><span>Use phone voice if cloud audio fails</span><input type="checkbox" id="deviceFallback" checked></label>
+          </div>
+          <div class="card">
+            <h4>Speech provider chain</h4><p>JARVIS tries your selected provider first, then uses the remaining providers as fallbacks.</p>
+            <label class="label" for="speechProvider">Preferred provider</label><select class="field" id="speechProvider"><option value="auto">Automatic · British Edge → Azure → Gemini</option><option value="gemini">Gemini first (generative)</option><option value="azure">Azure first</option><option value="edge">Edge TTS first</option></select>
+            <div class="provider-order"><span class="provider-chip">1 · Edge British</span><span class="provider-chip">2 · Azure</span><span class="provider-chip">3 · Gemini</span></div>
+            <label class="toggle"><span>Enable automatic provider fallback</span><input type="checkbox" id="speechFallback" checked></label>
+            <label class="label" for="edgeRate">Speech speed</label><select class="field" id="edgeRate"><option value="-8%">Slow and measured</option><option value="-4%" selected>Calm</option><option value="+0%">Normal</option><option value="+5%">Slightly faster</option></select>
+            <div class="note warn">Cloud voices need internet. Edge TTS is an unofficial online library, not an offline service. Device speech depends on voices installed on Android.</div>
+          </div>
+          <div class="card">
+            <h4>Google Gemini AI voice</h4><p>Expressive AI speech. Accent, pacing and character style are guided separately for each persona.</p>
+            <label class="label" for="geminiKey">Gemini API key</label><input class="field" id="geminiKey" type="password" autocomplete="off" placeholder="Paste Gemini API key">
+            <label class="label" for="geminiModel">TTS model</label><select class="field" id="geminiModel"><option value="gemini-3.6-flash-lite-tts">Gemini 3.8 Flash-Lite TTS</option><option value="gemini-3.6-flash-tts">Gemini 3.8 Flash TTS</option></select>
+            <div class="note">Voice profile: JARVIS uses Charon, FRIDAY uses Aoede, and EDITH uses Kore. The British accent is a direction to the voice model, not a guaranteed regional recording.</div>
+          </div>
+          <div class="card">
+            <h4>Microsoft Azure Speech</h4><p>Dedicated British neural voices. Fallback voice changes with the selected persona.</p>
+            <label class="label" for="azureKey">Azure Speech key</label><input class="field" id="azureKey" type="password" autocomplete="off" placeholder="Paste Azure Speech key">
+            <label class="label" for="azureRegion">Resource region</label><input class="field" id="azureRegion" value="southeastasia" placeholder="Your Azure resource region">
+            <div class="note" id="azureVoiceLabel">Selected voice: en-GB-RyanNeural</div>
+          </div>
+          <div class="card">
+            <h4>Edge TTS · free fallback</h4><p>No API key required. Uses British online voices through the edge-tts package.</p>
+            <div class="note" id="edgeVoiceLabel">Selected voice: en-GB-RyanNeural</div>
+            <div class="note warn">Install once in Pydroid: <strong>pip install edge-tts</strong>. It requires internet access.</div>
+            <div class="test-row"><button class="btn" id="testVoiceBtn">Test current voice</button><button class="btn secondary" id="stopVoiceBtn">Stop</button><span class="result" id="voiceStatus">Ready.</span></div>
+            <textarea class="field" id="testText" rows="2" style="margin-top:10px">Good morning. This is your assistant speaking in clear British English. The system is ready. How may I assist you today?</textarea>
+            <audio id="audioPlayer" controls class="hidden" style="width:100%;margin-top:10px"></audio>
+          </div>
+          <div class="card">
+            <h4>Internet access and web search</h4><p>Use live public web results in chat and in the Web tools category. Search runs through the local Python server.</p>
+            <label class="label" for="tavilyKey">Tavily Search API key (recommended)</label><input class="field" id="tavilyKey" type="password" autocomplete="off" placeholder="Paste Tavily key">
+            <div class="note">Tavily's current free plan lists 1,000 API credits per month and no credit card requirement. You can also use Gemini Google Search with the Gemini key above. Free limits and terms can change.</div>
+            <div class="test-row"><button class="btn secondary" id="testWebSearchBtn">Test web search</button><span class="result" id="webSearchStatus">Not tested.</span></div>
+          </div>
+          <div class="card">
+            <h4>AI chat connection</h4><p>The chat provider generates answers. Speech is configured separately above.</p>
+            <label class="label" for="chatProvider">Chat provider</label><select class="field" id="chatProvider"><option value="router" selected>JARVIS Omni Router · automatic fallback</option><option value="openrouter">OpenRouter (legacy)</option><option value="ollama">Ollama</option><option value="gemini">Google Gemini API</option></select>
+            <div id="openrouterFields"><label class="label" for="openrouterKey">OpenRouter API key</label><input class="field" id="openrouterKey" type="password" autocomplete="off" placeholder="Paste OpenRouter key"><label class="label" for="chatModel">Model ID</label><input class="field" id="chatModel" value="xiaomi/mimo-v2.6-flash" placeholder="provider/model-id"><label class="label" for="openrouterVisionModel">Vision model override (optional)</label><input class="field" id="openrouterVisionModel" placeholder="Leave blank to use the chat model"></div>
+            <div id="ollamaFields" class="hidden"><label class="label" for="ollamaUrl">Ollama server URL</label><input class="field" id="ollamaUrl" value="http://127.0.0.1:11434"><label class="label" for="ollamaModel">Installed local model</label><input class="field" id="ollamaModel" value="llama3.2"><label class="label" for="ollamaVisionModel">Local vision model (optional)</label><input class="field" id="ollamaVisionModel" placeholder="e.g. llava or qwen2.5vl"><div class="test-row"><button class="btn secondary" id="testOllamaBtn" type="button">Test local model</button><span class="result" id="ollamaStatus">Not tested.</span></div><div class="note">Ollama must already be running on this phone or another device you control. A model is not bundled in this ZIP. Local model quality and vision support depend on the model you install.</div></div>
+            <label class="toggle"><span>Use Ollama as a local backup if the selected provider fails</span><input type="checkbox" id="ollamaFallback" checked></label>
+            <div id="geminiChatFields" class="hidden"><label class="label" for="geminiChatModel">Gemini chat / vision model</label><input class="field" id="geminiChatModel" value="gemini-3.8-flash" placeholder="Gemini model name"><div class="note">Uses the Gemini API key above. Supports image input and Google Search grounding on supported models.</div></div>
+            <label class="label" for="maxTokens">Maximum reply tokens</label><select class="field" id="maxTokens"><option value="512">512 · short</option><option value="1024" selected>1,024 · balanced</option><option value="2048">2,048 · longer</option><option value="4096">4,096 · maximum</option></select>
+            <div class="note">Use “Save keys now” or enable “Remember API keys” to keep your provider credentials on this device.</div>
+          </div>
+        </div>
+        <div class="hint">If Gemini or Azure is not configured, JARVIS skips it and continues to the next speech provider. No provider key is required to use Edge TTS alone.</div>
+      </section>
+
+
+      <section id="view-router" class="view panel">
+        <div class="panel-head"><div><h3>JARVIS OMNI ROUTER</h3><small>One local OpenAI-compatible endpoint · provider fallback · agent routing</small></div><span class="badge" id="routerProviderBadge">0 PROVIDERS</span></div>
+        <div class="section-grid">
+          <div class="card" style="grid-column:1/-1">
+            <h4>Local OpenAI-compatible endpoint</h4>
+            <p>Point supported apps and coding tools at this address. JARVIS routes requests through your configured providers and falls back by tier.</p>
+            <label class="label" for="gatewayBaseUrl">Base URL</label><input class="field" id="gatewayBaseUrl" readonly value="http://127.0.0.1:8765/v1">
+            <label class="label" for="gatewayToken">Local gateway bearer token</label><input class="field" id="gatewayToken" readonly type="password" value="Loading local token…">
+            <div class="test-row"><button class="btn secondary" id="showGatewayTokenBtn" type="button">Show / hide token</button><button class="btn" id="copyGatewayConfigBtn" type="button">Copy connection details</button><button class="btn ghost" id="refreshGatewayBtn" type="button">Refresh status</button><span class="result" id="gatewayStatus">Starting router…</span></div>
+            <div class="note warn">Keep the server on 127.0.0.1. Do not bind it to 0.0.0.0 or expose this token publicly. The token protects local /v1 calls; providers and their billing remain controlled by their own accounts.</div>
+          </div>
+          <div class="card">
+            <h4>Add an AI provider</h4><p>Use a template or any provider that supports the OpenAI Chat Completions API. Anthropic has a direct adapter.</p>
+            <label class="label" for="providerTemplate">Provider template</label><select class="field" id="providerTemplate"><option value="openai">OpenAI</option><option value="anthropic">Anthropic</option><option value="gemini">Google Gemini</option><option value="openrouter">OpenRouter</option><option value="deepseek">DeepSeek</option><option value="groq">Groq</option><option value="together">Together AI</option><option value="fireworks">Fireworks AI</option><option value="cerebras">Cerebras</option><option value="mistral">Mistral</option><option value="xai">xAI</option><option value="ollama">Ollama local</option><option value="lmstudio">LM Studio local</option><option value="custom">Custom OpenAI-compatible</option></select>
+            <label class="label" for="providerName">Display name</label><input class="field" id="providerName" placeholder="e.g. My DeepSeek connection">
+            <label class="label" for="providerId">Provider ID</label><input class="field" id="providerId" placeholder="e.g. deepseek-main">
+            <label class="label" for="providerBaseUrl">API base URL</label><input class="field" id="providerBaseUrl" placeholder="https://api.example.com/v1">
+            <label class="label" for="providerKey">API key (leave blank for local providers)</label><input class="field" id="providerKey" type="password" autocomplete="off" placeholder="Paste provider key">
+            <label class="label" for="providerModel">Default model ID</label><input class="field" id="providerModel" placeholder="Enter exact model ID">
+            <div class="form-row"><div><label class="label" for="providerTier">Fallback tier</label><select class="field" id="providerTier"><option value="subscription">1 · Subscription</option><option value="api" selected>2 · API key</option><option value="cheap">3 · Lower cost</option><option value="free">4 · Free / local</option></select></div><div><label class="label" for="providerPriority">Priority (lower first)</label><input class="field" id="providerPriority" type="number" min="1" max="999" value="50"></div></div>
+            <label class="toggle"><span>Supports image input (vision)</span><input type="checkbox" id="providerVision" checked></label>
+            <label class="toggle"><span>Supports function / tool calling</span><input type="checkbox" id="providerTools" checked></label>
+            <div class="test-row"><button class="btn" id="addProviderBtn" type="button">Add provider</button><span class="result" id="providerFormStatus">Keys remain on this device.</span></div>
+          </div>
+          <div class="card">
+            <h4>Configured provider pool</h4><p>Fallback order is Subscription → API → Lower cost → Free/local. Change priority within a tier. Failed providers are skipped for that request.</p>
+            <div id="routerProviderList" class="provider-list"><div class="empty">Loading provider connections…</div></div>
+            <div class="test-row"><button class="btn" id="saveRouterProvidersBtn" type="button">Save provider pool</button><button class="btn ghost" id="syncOldKeysBtn" type="button">Import old settings</button><span class="result" id="routerSaveStatus">No providers loaded.</span></div>
+            <div class="note warn">API keys are stored in a local JSON config under your Pydroid app home with restricted file permissions where supported. This is local plaintext storage, not encryption. Only configure keys on a device you control.</div>
+          </div>
+          <div class="card" style="grid-column:1/-1">
+            <h4>Routing and context options</h4>
+            <label class="label" for="routerModel">Model route</label><input class="field" id="routerModel" value="auto" placeholder="auto or provider-id/model-id">
+            <label class="label" for="compressionMode">Safe prompt compression</label><select class="field" id="compressionMode"><option value="off">Off</option><option value="safe">Safe compact · keeps code blocks unchanged</option></select>
+            <div class="note">This lightweight build safely compacts repeated whitespace in prose only. It does not implement OmniRoute's RTK/Caveman compression engines or claim a token-saving percentage.</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="view-studio" class="view panel">
+        <div class="panel-head"><div><h3>CREATIVE & VISION STUDIO</h3><small>Generate images, run non-identifying face detection, and create a QR for this phone</small></div><span class="badge">VISION STUDIO</span></div>
+        <div class="studio-grid">
+          <div class="card">
+            <h4>AI and local image generation</h4><p>Generate with Gemini, a configured local Stable Diffusion / Forge model, or offline vector artwork. Gemini may require a billable API tier.</p>
+            <label class="label" for="imagePrompt">Describe your image</label><textarea class="field" id="imagePrompt" rows="4" placeholder="A polished futuristic blue holographic assistant dashboard in a dark room..."></textarea>
+            <div class="form-row"><div><label class="label" for="imageAspect">Aspect ratio</label><select class="field" id="imageAspect"><option>1:1</option><option>16:9</option><option>9:16</option><option>4:3</option><option>3:4</option><option>3:2</option><option>2:3</option><option>4:5</option><option>5:4</option></select></div><div><label class="label" for="imageSize">Image size</label><select class="field" id="imageSize"><option>512</option><option selected>1K</option><option>2K</option><option>4K</option></select></div></div>
+            <label class="label" for="imageEngine">Image generation engine</label><select class="field" id="imageEngine"><option value="auto" selected>Auto · Gemini → Local diffusion → Offline SVG</option><option value="gemini">Gemini image API</option><option value="local_sd">Local Stable Diffusion / Forge</option><option value="offline_svg">Offline SVG vector art</option></select>
+            <label class="label" for="geminiImageModel">Gemini image model</label><input class="field" id="geminiImageModel" value="gemini-3.1-flash-image">
+            <label class="label" for="localImageApiUrl">Local image server API URL</label><input class="field" id="localImageApiUrl" placeholder="http://127.0.0.1:7860" autocomplete="off">
+            <div class="test-row"><button class="btn secondary" id="testLocalImageBtn" type="button">Test local server</button><span class="result" id="localImageStatus">Optional · requires Stable Diffusion WebUI / Forge API.</span></div>
+            <div class="note">Local diffusion uses a separate model server with its API enabled. Pydroid itself does not install or run a Stable Diffusion model. If no model server is configured, Auto can still create a basic offline vector illustration.</div>
+            <div class="test-row"><button class="btn" id="generateImageBtn" type="button">Generate image</button><span class="result" id="imageGenStatus">Ready.</span></div>
+            <div class="studio-output" id="imageGenOutput">Your generated image will appear here.</div>
+          </div>
+          <div class="card">
+            <h4>SVG vector builder</h4><p>Paste SVG source to validate, preview and download it. You can also ask JARVIS to write SVG code in chat, then paste it here.</p>
+            <label class="label" for="svgSourceInput">SVG source</label><textarea class="field" id="svgSourceInput" rows="9" spellcheck="false" placeholder="&lt;svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400"&gt;...&lt;/svg&gt;"></textarea>
+            <div class="test-row"><button class="btn" id="buildSvgBtn" type="button">Validate & build SVG</button><span class="result" id="svgBuildStatus">Ready.</span></div>
+            <div class="studio-output" id="svgBuildOutput">Your safe SVG preview will appear here.</div>
+          </div>
+          <div class="card">
+            <h4>Face presence detector</h4><p>Counts visible faces and estimates approximate regions using your selected vision model. It does not identify people or match identities.</p>
+            <label class="label" for="faceImageInput">Choose an image</label><input class="field" id="faceImageInput" type="file" accept="image/*">
+            <div class="test-row"><button class="btn" id="detectFacesBtn" type="button">Detect visible faces</button><span class="result" id="faceStatus">No image selected.</span></div>
+            <div class="studio-output" id="faceOutput">Face count and approximate regions will appear here. Results may be imperfect.</div>
+            <div class="note warn">Privacy limit: this feature cannot tell you who someone is, verify identity, or track a person across photos.</div>
+          </div>
+          <div class="card">
+            <h4>JARVIS quick QR code</h4><p>Create a scannable QR containing this phone's local JARVIS URL.</p>
+            <div class="note">http://127.0.0.1:8765/</div>
+            <div class="test-row"><button class="btn secondary" id="makeLocalQrBtn" type="button">Create local QR</button><span class="result" id="qrStatus">Ready.</span></div>
+            <div class="studio-output" id="qrOutput">QR image will appear here.</div>
+            <div class="note warn">127.0.0.1 points to the device scanning it. This QR is intended for JARVIS running on this same phone, not for other phones on Wi-Fi.</div>
+          </div>
+          <div class="card">
+            <h4>Local AI fallback</h4><p>Connect an Ollama model to keep language-model help available when cloud AI is unavailable.</p>
+            <div class="note">JARVIS keeps its local calculator, converters, QR tools and other utilities available offline. Ollama adds local language reasoning when a reachable Ollama server and downloaded model are configured.</div>
+            <button class="btn secondary" type="button" id="openLocalSettingsBtn">Configure local model</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="view-agents" class="view panel">
+        <div class="panel-head"><div><h3>SUBAGENT WORKSPACE</h3><small>100 specialist roles · up to 20 per task · four concurrent model calls</small></div><span class="badge" id="agentCountBadge">8 PRESETS</span></div>
+        <div class="section-grid">
+          <div class="card">
+            <h4>100 specialist roles</h4><p>Search and select roles, or let JARVIS automatically choose the most relevant specialists for each task.</p><input class="field" id="agentSearch" type="search" placeholder="Search 100 specialist roles…" style="margin-bottom:9px"><label class="toggle"><span>Automatically select roles from the task</span><input type="checkbox" id="agentAutoSelect" checked></label>
+            <div class="agent-list" id="agentList"></div>
+            <div class="note" id="agentLimitNote">0/100 custom agent profiles. Select up to 20 per run.</div>
+          </div>
+          <div class="card">
+            <h4>Create a custom agent</h4><p>Give your agent a role and optionally pin it to a configured provider and model.</p>
+            <label class="label" for="newAgentName">Agent name</label><input class="field" id="newAgentName" maxlength="40" placeholder="e.g. Minecraft Mod Helper">
+            <label class="label" for="newAgentRole">Agent role</label><input class="field" id="newAgentRole" maxlength="100" placeholder="What should this agent specialise in?">
+            <label class="label" for="newAgentPrompt">Instructions</label><textarea class="field" id="newAgentPrompt" rows="4" maxlength="1400" placeholder="Explain how this agent should approach tasks..."></textarea><label class="label" for="newAgentProvider">Provider ID (auto = router)</label><input class="field" id="newAgentProvider" value="auto" placeholder="auto or provider ID"><label class="label" for="newAgentModel">Model override (auto = provider default)</label><input class="field" id="newAgentModel" value="auto" placeholder="auto or exact model ID">
+            <div class="test-row"><button class="btn" id="addAgentBtn" type="button">Add agent</button><span class="result" id="agentSaveStatus">You can save up to 100 agent profiles.</span></div>
+          </div>
+          <div class="card" style="grid-column:1/-1">
+            <h4>Delegate a task</h4><p>Choose up to 20 agents above, or enable auto-selection. Four model calls run concurrently to limit phone load. Each agent can use its own provider/model.</p>
+            <label class="label" for="agentTask">Task for your agents</label><textarea class="field" id="agentTask" rows="4" placeholder="Review my JARVIS project architecture and suggest the most important fixes..."></textarea>
+            <div class="test-row"><button class="btn" id="runAgentsBtn" type="button">Run selected agents</button><span class="result" id="agentRunStatus">Ready.</span></div>
+            <div id="agentResults"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="view-operations" class="view panel">
+        <div class="panel-head"><div><h3>INTELLIGENCE & AUTOMATION</h3><small>Memory · MCP · coding workspace · research · workflows · live vision · Android tools</small></div><span class="badge" id="opsStatusBadge">CONNECTING</span></div>
+        <div class="ops-grid">
+          <div class="card ops-card">
+            <h4>Long-term memory</h4><p>Save notes you explicitly want JARVIS to remember. Credentials and API keys are rejected.</p>
+            <label class="label" for="opsMemoryText">New memory</label><textarea class="field" id="opsMemoryText" rows="3" placeholder="Remember that my current project is…"></textarea>
+            <div class="test-row"><button class="btn" id="opsMemorySave">Save memory</button><span class="result" id="opsMemoryStatus">Local persistent storage</span></div>
+            <label class="label" for="opsMemorySearch">Search memories</label><input class="field" id="opsMemorySearch" placeholder="Search saved notes…">
+            <div class="ops-list" id="opsMemoryList">No memories loaded.</div>
+          </div>
+          <div class="card ops-card">
+            <h4>MCP integrations</h4><p>Connect remote Model Context Protocol Streamable HTTP servers. Only connect servers you trust.</p>
+            <label class="label" for="opsMcpName">Server name</label><input class="field" id="opsMcpName" placeholder="My MCP server">
+            <label class="label" for="opsMcpUrl">MCP endpoint URL</label><input class="field" id="opsMcpUrl" placeholder="https://example.com/mcp">
+            <label class="label" for="opsMcpToken">Bearer token (optional)</label><input class="field" id="opsMcpToken" type="password" placeholder="Optional server token">
+            <div class="test-row"><button class="btn" id="opsMcpConnect">Save & discover tools</button><span class="result" id="opsMcpStatus">No server selected.</span></div>
+            <div class="ops-list" id="opsMcpList">No MCP servers connected.</div>
+          </div>
+          <div class="card ops-card">
+            <h4>Coding workspace</h4><p>JARVIS can propose project files, validate syntax and keep backups. Generated code is never run automatically.</p>
+            <label class="label" for="opsProject">Project</label><input class="field" id="opsProject" value="default">
+            <label class="label" for="opsFilePath">Relative file path</label><input class="field" id="opsFilePath" value="main.py" placeholder="main.py">
+            <label class="label" for="opsFileContent">File contents</label><textarea class="field" id="opsFileContent" rows="5" placeholder="Paste or draft code here…"></textarea>
+            <div class="test-row"><button class="btn" id="opsWorkspacePropose">Validate & propose</button><button class="btn secondary" id="opsWorkspaceRefresh">Refresh files</button></div>
+            <div class="ops-list" id="opsWorkspaceFiles">No project files loaded.</div>
+            <div class="ops-list" id="opsWorkspaceDrafts">No pending code drafts.</div>
+          </div>
+          <div class="card ops-card">
+            <h4>Research engine</h4><p>Search the web, collect source links and save reports locally.</p>
+            <label class="label" for="opsResearchQuery">Research topic</label><textarea class="field" id="opsResearchQuery" rows="3" placeholder="Research the latest changes in…"></textarea>
+            <div class="test-row"><button class="btn" id="opsResearchRun">Research & save report</button><span class="result" id="opsResearchStatus">Uses your configured web-search provider.</span></div>
+            <div class="ops-list" id="opsResearchReports">No saved reports loaded.</div>
+          </div>
+          <div class="card ops-card">
+            <h4>Automation studio</h4><p>Build workflows from limited, allow-listed steps. Scheduled workflows run only while the JARVIS server is running.</p>
+            <label class="label" for="opsWorkflowName">Workflow name</label><input class="field" id="opsWorkflowName" placeholder="Morning research">
+            <label class="label" for="opsWorkflowSteps">Steps (JSON)</label><textarea class="field" id="opsWorkflowSteps" rows="5">[{"type":"web_search","query":"latest general technology news"}]</textarea>
+            <label class="label" for="opsWorkflowInterval">Repeat interval in minutes (0 = manual)</label><input class="field" id="opsWorkflowInterval" type="number" min="0" max="10080" value="0">
+            <div class="test-row"><button class="btn" id="opsWorkflowSave">Save workflow</button><span class="result" id="opsWorkflowStatus">Minimum scheduled interval: 15 minutes.</span></div>
+            <div class="ops-list" id="opsWorkflowList">No workflows saved.</div>
+          </div>
+          <div class="card ops-card">
+            <h4>Live vision</h4><p>Use your camera with permission. JARVIS analyzes a captured frame; it does not continuously identify or track people.</p>
+            <video id="opsCameraVideo" playsinline autoplay muted class="ops-camera hidden"></video>
+            <canvas id="opsCameraCanvas" class="hidden"></canvas>
+            <div class="test-row"><button class="btn" id="opsCameraStart">Start camera</button><button class="btn secondary" id="opsCameraCapture" disabled>Analyze frame</button><button class="btn danger" id="opsCameraStop" disabled>Stop</button></div>
+            <label class="label" for="opsVisionPrompt">What should JARVIS inspect?</label><input class="field" id="opsVisionPrompt" value="Describe the visible scene and any readable text. Do not identify people.">
+            <div class="ops-list" id="opsVisionStatus">Camera is off. Permission is requested only when you tap Start camera.</div>
+          </div>
+          <div class="card ops-card">
+            <h4>Android companion features</h4><p>Browser-based features that work where Android Chrome supports them.</p>
+            <div class="test-row"><button class="btn" id="opsShareBtn">Share JARVIS link</button><button class="btn secondary" id="opsCopyBtn">Copy local link</button><button class="btn secondary" id="opsNotifyBtn">Test notification</button></div>
+            <div class="ops-list" id="opsMobileStatus">Checking browser capabilities…</div>
+            <div class="note">Native app launching, system settings, contacts and unrestricted file access require a separate Android companion app and explicit permissions.</div>
+          </div>
+          <div class="card ops-card">
+            <h4>Continuous voice</h4><p>Optional browser speech recognition. Browser support varies and recognition may use an online service. Stop listening any time.</p>
+            <div class="test-row"><button class="btn" id="opsVoiceStart">Start continuous listening</button><button class="btn danger" id="opsVoiceStop" disabled>Stop listening</button></div>
+            <div class="ops-list" id="opsVoiceStatus">Microphone is off.</div>
+          </div>
+          <div class="card ops-card">
+            <h4>Smart model router</h4><p>Preview which configured models fit a task based on model capabilities, provider priority and routing tier.</p>
+            <label class="label" for="opsRouteTask">Task description</label><textarea class="field" id="opsRouteTask" rows="3" placeholder="Describe what you want JARVIS to do…"></textarea>
+            <div class="test-row"><button class="btn" id="opsRoutePreview">Preview model route</button><span class="result" id="opsRouteStatus">Automatic capability-aware ranking</span></div>
+            <div class="ops-list" id="opsRouteResults">No route preview yet.</div>
+          </div>
+        </div>
+      </section>
+
+
+      <section id="view-ecosystem" class="view panel">
+        <div class="panel-head"><div><h3>JARVIS ECOSYSTEM</h3><small>Plugin marketplace · visual workflows · project versions · knowledge brain · device network</small></div><span class="badge" id="ecoStatusBadge">CONNECTING</span></div>
+        <div class="eco-grid">
+          <div class="card eco-card">
+            <h4>Plugin marketplace</h4><p>Enable bundled integration packs. Packages are declarative configuration; this page does not download or run untrusted code.</p>
+            <div class="test-row"><button class="btn secondary" id="ecoPluginsRefresh">Refresh marketplace</button><span class="result" id="ecoPluginsStatus">Loading…</span></div>
+            <div class="eco-list" id="ecoPluginsList">Loading plugins…</div>
+          </div>
+          <div class="card eco-card">
+            <h4>Visual workflow designer</h4><p>Build a workflow from supported nodes. Use Add node, edit its fields, then save the workflow.</p>
+            <label class="label" for="ecoWorkflowName">Workflow name</label><input class="field" id="ecoWorkflowName" maxlength="80" value="New JARVIS workflow">
+            <div class="eco-node-toolbar"><select class="field" id="ecoNodeType"><option value="web_search">Web search</option><option value="memory_search">Search memory</option><option value="local_tool">Run local utility</option></select><button class="btn secondary" id="ecoAddNode">Add node</button></div>
+            <div id="ecoWorkflowNodes" class="eco-nodes"><div class="eco-item">Add a node to begin.</div></div>
+            <div class="test-row"><button class="btn" id="ecoWorkflowSave">Save workflow</button><button class="btn secondary" id="ecoWorkflowRefresh">Refresh saved</button><span class="result" id="ecoWorkflowStatus">Manual run or optional schedule through Operations.</span></div>
+            <div class="eco-list" id="ecoWorkflowList"></div>
+          </div>
+          <div class="card eco-card">
+            <h4>Project versions</h4><p>Create portable snapshots, compare the newest two snapshots and restore an earlier one. Snapshot archives exclude common credential files.</p>
+            <label class="label" for="ecoProjectName">Workspace project</label><input class="field" id="ecoProjectName" maxlength="48" value="default">
+            <div class="test-row"><button class="btn" id="ecoSnapshotCreate">Create snapshot</button><button class="btn secondary" id="ecoProjectRefresh">Refresh history</button><button class="btn secondary" id="ecoProjectCompare">Compare latest</button></div>
+            <div class="eco-list" id="ecoProjectHistory">No snapshots loaded.</div>
+            <pre class="eco-diff" id="ecoProjectDiff">Comparison output appears here.</pre>
+            <div class="note">Optional Git history is shown when Git is installed and the workspace is a Git repository. ZIP snapshots work without Git.</div>
+          </div>
+          <div class="card eco-card">
+            <h4>Local knowledge brain</h4><p>Import documents or add notes. JARVIS can retrieve relevant snippets for future conversations. Search uses local keyword ranking, not embeddings.</p>
+            <label class="label" for="ecoKnowledgeTitle">Document title</label><input class="field" id="ecoKnowledgeTitle" maxlength="160" placeholder="Project notes">
+            <label class="label" for="ecoKnowledgeText">Text or notes</label><textarea class="field" id="ecoKnowledgeText" rows="4" maxlength="30000" placeholder="Paste notes or reference material…"></textarea>
+            <div class="test-row"><button class="btn" id="ecoKnowledgeAdd">Save to knowledge</button><label class="btn secondary" for="ecoKnowledgeFile">Import file</label><input id="ecoKnowledgeFile" type="file" accept=".txt,.md,.csv,.json,.html,.pdf" hidden></div>
+            <label class="label" for="ecoKnowledgeQuery">Search knowledge</label><input class="field" id="ecoKnowledgeQuery" placeholder="Search your imported documents…">
+            <div class="test-row"><button class="btn secondary" id="ecoKnowledgeSearch">Search</button><button class="btn secondary" id="ecoKnowledgeRefresh">Refresh documents</button><span class="result" id="ecoKnowledgeStatus">Saved locally on this device.</span></div>
+            <div class="eco-list" id="ecoKnowledgeList">No documents loaded.</div>
+            <div class="eco-list" id="ecoKnowledgeResults"></div>
+          </div>
+          <div class="card eco-card" style="grid-column:1/-1">
+            <h4>Device network</h4><p>Pair another browser on the same trusted Wi-Fi using a one-time code. Messages are relayed through this JARVIS server; this is not an encrypted cloud sync service.</p>
+            <div class="eco-item" style="margin:8px 0"><strong>LAN access token</strong><span>Only needed when opening JARVIS from another device. Read the token from the persistent file shown in the setup guide. It protects the app APIs when the server is shared on Wi-Fi.</span><label class="label" for="ecoLanToken">LAN access token</label><input class="field" id="ecoLanToken" type="password" autocomplete="off" placeholder="Paste LAN token from the phone's persistent folder"><div class="test-row"><button class="btn secondary" id="ecoLanTokenSave">Save token in this browser</button><button class="btn ghost" id="ecoLanTokenClear">Clear token</button><span class="result" id="ecoLanTokenStatus">Not required on localhost.</span></div></div>
+            <div class="eco-device-grid">
+              <div><button class="btn" id="ecoPairGenerate">Generate pairing code</button><div class="eco-pair-code" id="ecoPairCode">------</div><div class="note" id="ecoPairHint">Code expires after five minutes and can be used once.</div></div>
+              <div><label class="label" for="ecoJoinCode">Pair this browser to another JARVIS host</label><input class="field" id="ecoJoinCode" inputmode="numeric" maxlength="6" placeholder="6-digit code"><label class="label" for="ecoDeviceName">Device name</label><input class="field" id="ecoDeviceName" maxlength="60" value="Android browser"><button class="btn secondary" id="ecoDeviceJoin">Join device</button><div class="result" id="ecoDeviceStatus">A paired browser stores its token in this browser profile.</div></div>
+            </div>
+            <label class="label" for="ecoDeviceTarget">Send to paired device</label><select class="field" id="ecoDeviceTarget"><option value="">Choose device</option></select>
+            <textarea class="field" id="ecoDeviceMessage" rows="2" maxlength="2000" placeholder="Message another paired JARVIS browser…"></textarea>
+            <div class="test-row"><button class="btn" id="ecoDeviceSend">Send message</button><button class="btn secondary" id="ecoDeviceInbox">Check this device inbox</button><button class="btn secondary" id="ecoDevicesRefresh">Refresh devices</button></div>
+            <div class="eco-list" id="ecoDevicesList">No paired devices loaded.</div><div class="eco-list" id="ecoDeviceMessages"></div>
+            <div class="note warn">For pairing between devices, open JARVIS on the phone's Wi-Fi address (not 127.0.0.1) and bind the server to the LAN only on a trusted private network. Do not port-forward or expose this HTTP server to the public internet.</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="view-bdfd" class="view panel">
+        <div class="note"><strong>BDFD-only tunnel port:</strong> point your HTTPS tunnel to <code>http://127.0.0.1:8766</code>. Do not tunnel the full dashboard port 8765. This relay forwards only the allow-listed BDFD API routes.</div>
+        <div class="panel-head"><div><h3>DISCORD / BDFD MESSAGE BRIDGE</h3><small>Connect Bot Designer for Discord to your J.A.R.V.I.S. assistant</small></div><span class="badge">TOKEN AUTHENTICATED</span></div>
+        <div class="section-grid">
+          <div class="card" style="grid-column:1/-1">
+            <h4>1 · Your JARVIS bridge token</h4>
+            <p>This is the token BDFD must send in its Authorization header. It is generated by JARVIS and can only be viewed from this phone's local JARVIS page.</p>
+            <label class="label" for="bdfdBridgeToken">Bridge token</label>
+            <input class="field" id="bdfdBridgeToken" type="password" readonly autocomplete="off" placeholder="Loading token from JARVIS…">
+            <div class="test-row">
+              <button class="btn secondary" id="bdfdRevealToken" type="button">Show token</button>
+              <button class="btn" id="bdfdCopyToken" type="button">Copy token</button>
+              <button class="btn danger" id="bdfdRotateToken" type="button">Regenerate token</button>
+              <span class="result" id="bdfdTokenStatus">Loading bridge settings…</span>
+            </div>
+            <div class="note" id="bdfdTokenPath">Token location will appear here.</div>
+          </div>
+          <div class="card" style="grid-column:1/-1">
+            <h4>2 · Generate your BDFD commands</h4>
+            <p>Paste the public HTTPS base address of your secure relay/host. Do not enter 127.0.0.1 or a private phone address here; BDFD runs remotely.</p>
+            <label class="label" for="bdfdPublicHost">Your JARVIS HTTPS address</label>
+            <input class="field" id="bdfdPublicHost" type="url" inputmode="url" placeholder="https://your-secure-host.example">
+            <div class="test-row"><button class="btn" id="bdfdBuildCommands" type="button">Generate BDFD code</button><span class="result" id="bdfdBuildStatus">Enter your HTTPS address to generate commands.</span></div>
+            <label class="label" for="bdfdAskCode">Command 1 · !askjarvis (BDScript 2)</label>
+            <textarea class="field" id="bdfdAskCode" rows="9" readonly spellcheck="false" placeholder="Generate the BDFD code above…"></textarea>
+            <div class="test-row"><button class="btn secondary" id="bdfdCopyAskCode" type="button">Copy !askjarvis code</button></div>
+            <label class="label" for="bdfdPollCode">Command 2 · !jarvispoll (BDScript 2)</label>
+            <textarea class="field" id="bdfdPollCode" rows="8" readonly spellcheck="false" placeholder="Generated poll command will appear here…"></textarea>
+            <div class="test-row"><button class="btn secondary" id="bdfdCopyPollCode" type="button">Copy !jarvispoll code</button></div>
+            <label class="label" for="bdfdStatusCode">Command 3 · !jarvisstatus (BDScript 2)</label>
+            <textarea class="field" id="bdfdStatusCode" rows="5" readonly spellcheck="false" placeholder="Generated status command will appear here…"></textarea>
+            <div class="test-row"><button class="btn secondary" id="bdfdCopyStatusCode" type="button">Copy !jarvisstatus code</button></div>
+          </div>
+          <div class="card">
+            <h4>3 · Test the bridge from this phone</h4>
+            <p>This button sends the token automatically. Opening <code>/api/bdfd/health</code> directly in a browser without an Authorization header will correctly return 401 Unauthorized.</p>
+            <div class="test-row"><button class="btn" id="bdfdTestBridge" type="button">Test authenticated connection</button><span class="result" id="bdfdHealthStatus">Not tested yet.</span></div>
+          </div>
+          <div class="card">
+            <h4>How the bridge works</h4>
+            <p>Discord user → BDFD custom command → JARVIS AI → reply returned to BDFD → Discord channel.</p>
+            <div class="note warn">BDFD cannot reach localhost on your phone. You need a trusted HTTPS relay or host that forwards traffic securely to JARVIS. Never expose Pydroid's plain HTTP development server directly to the public internet.</div>
+          </div>
+          <div class="card" style="grid-column:1/-1">
+            <h4>API endpoints</h4>
+            <pre style="white-space:pre-wrap;overflow-wrap:anywhere;background:rgba(0,0,0,.18);padding:12px;border-radius:10px;font-size:12px;line-height:1.65">POST /api/bdfd/chat
+POST /api/bdfd/messages
+POST /api/bdfd/outbox
+GET  /api/bdfd/outbox/next?channel_id=...
+POST /api/bdfd/outbox/ack
+GET  /api/bdfd/conversation
+GET  /api/bdfd/health
+GET  /api/bdfd/settings  (local browser only)
+POST /api/bdfd/token/rotate  (local browser only)</pre>
+            <div class="note">Discord → JARVIS uses !askjarvis. JARVIS → Discord uses the outbox and !jarvispoll. BDFD performs the actual Discord send; JARVIS does not log in to Discord.</div>
+            <div class="test-row"><a class="btn secondary" href="BDFD_Integration.txt" download>Open BDFD command guide</a></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="view-tools" class="view panel">
+        <div class="panel-head"><div><h3>JARVIS TOOL LIBRARY</h3><small>Full searchable toolkit · utilities, data, creative, developer, web and conversions</small></div><span class="badge" id="toolsCountBadge">LOADING</span></div>
+        <div class="tool-toolbar"><input class="field" id="toolSearch" type="search" placeholder="Search tools…"><select class="field" id="toolCategory" aria-label="Filter by category"><option value="all">All categories</option></select></div>
+        <div class="category-row" id="categoryQuickFilters"><button class="category-btn active" data-category="all">All</button></div>
+        <div class="tool-count" id="toolCountLabel">Loading local tools…</div>
+        <div class="tool-list" id="toolList"><div class="empty">Loading tools…</div></div><div style="padding:0 14px 14px;text-align:center"><button class="btn secondary" id="loadMoreTools" hidden>Load more tools</button></div>
+        <div class="tool-runner" id="toolRunner">
+          <div class="tool-runner-head"><div><h4 id="selectedToolLabel">Select a tool</h4><span class="result" id="toolStatus">Choose a tool above to open its inputs.</span></div><button class="btn ghost" id="resetToolBtn">Reset</button></div>
+          <div class="tool-form" id="toolForm"></div>
+          <details class="advanced"><summary>Advanced: edit JSON manually</summary><textarea class="field" id="toolArgs" spellcheck="false">{}</textarea></details>
+          <div class="test-row"><button class="btn" id="runToolBtn" disabled>Run tool</button><button class="btn secondary" id="copyToolBtn" disabled>Copy result</button></div>
+          <div id="toolOutput" class="output">Your tool result will appear here.</div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <div class="footer">J.A.R.V.I.S. ANDROID EDITION · INTELLIGENCE + AUTOMATION · v2.5.2</div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+/* Add the saved JARVIS LAN token to same-origin API requests before the main UI bootstraps. */
+(()=>{const originalFetch=window.fetch.bind(window);window.fetch=(input,init={})=>{try{const raw=input instanceof Request?input.url:input;const url=new URL(raw,location.href);if(url.origin===location.origin){const headers=new Headers(init.headers||(input instanceof Request?input.headers:undefined));const token=localStorage.getItem('jarvis_lan_access_token_v1');if(token)headers.set('X-JARVIS-LAN-TOKEN',token);return originalFetch(input,{...init,headers});}}catch(_){}return originalFetch(input,init);};})();
+</script>
+<script>
+(() => {
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const state = {messages:[],tools:[],selectedTool:null,audioUrl:null,recognition:null,activeCategory:'all',lastToolResult:null,toastTimer:null,image:null};
+  const VOICE_PROFILES = {
+    'J.A.R.V.I.S.':{gemini:'Charon',azure:'en-GB-RyanNeural',edge:'en-GB-RyanNeural',label:'Ryan · composed male'},
+    'F.R.I.D.A.Y.':{gemini:'Aoede',azure:'en-GB-SoniaNeural',edge:'en-GB-SoniaNeural',label:'Sonia · warm female'},
+    'E.D.I.T.H.':{gemini:'Kore',azure:'en-GB-LibbyNeural',edge:'en-GB-LibbyNeural',label:'Libby · precise female'},
+    'Professional':{gemini:'Charon',azure:'en-GB-RyanNeural',edge:'en-GB-RyanNeural',label:'Ryan · professional'},
+    'Friendly':{gemini:'Aoede',azure:'en-GB-SoniaNeural',edge:'en-GB-SoniaNeural',label:'Sonia · friendly'}
+  };
+  const escapeHTML = value => String(value ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  function toast(message){const el=$('toast');el.textContent=message;el.classList.add('show');clearTimeout(state.toastTimer);state.toastTimer=setTimeout(()=>el.classList.remove('show'),2400);}
+  function now(){const d=new Date();$('clockTime').textContent=d.toLocaleTimeString([],{hour12:false});$('clockDate').textContent=d.toLocaleDateString([],{weekday:'long',year:'numeric',month:'short',day:'numeric'});}
+  now();setInterval(now,1000);
+  const SAVED_KEY_STORAGE = 'jarvis_saved_provider_keys_v2';
+  const PROVIDER_KEY_IDS = ['geminiKey','azureKey','tavilyKey','openrouterKey'];
+  function savedKeyValues(){const values={};PROVIDER_KEY_IDS.forEach(id=>{values[id]=$(id).value.trim();});return values;}
+  function persistKeys(showToast=false){
+    if(!$('rememberKeys')?.checked)return;
+    try{localStorage.setItem(SAVED_KEY_STORAGE,JSON.stringify(savedKeyValues()));$('keysStatus').textContent='Saved in this browser on this device.';if(showToast)toast('API keys saved on this device.');}
+    catch(err){$('keysStatus').textContent='Browser storage unavailable. Keep keys for this session only.';if(showToast)toast('Could not save keys in browser storage.');}
+  }
+  function restoreKeys(){
+    try{const raw=localStorage.getItem(SAVED_KEY_STORAGE);if(!raw)return;const values=JSON.parse(raw);PROVIDER_KEY_IDS.forEach(id=>{if(typeof values[id]==='string')$(id).value=values[id];});$('keysStatus').textContent='Saved keys restored from this browser.';}
+    catch(err){$('keysStatus').textContent='Saved keys could not be read.';}
+  }
+  function clearSavedKeys(){
+    try{localStorage.removeItem(SAVED_KEY_STORAGE);}catch(err){}
+    PROVIDER_KEY_IDS.forEach(id=>$(id).value='');$('keysStatus').textContent='Saved keys cleared.';toast('Saved API keys cleared.');
+  }
+  restoreKeys();
+  $('saveKeysBtn').addEventListener('click',()=>{if(!$('rememberKeys').checked){$('rememberKeys').checked=true;}persistKeys(true);});
+  $('clearKeysBtn').addEventListener('click',()=>{if(confirm('Delete saved API keys from this browser and clear the fields?'))clearSavedKeys();});
+  $('rememberKeys').addEventListener('change',()=>{if($('rememberKeys').checked)persistKeys(true);else{$('keysStatus').textContent='Auto-save disabled. Existing saved keys remain until you clear them.';}});
+  PROVIDER_KEY_IDS.forEach(id=>$(id).addEventListener('input',()=>persistKeys(false)));
+
+  function currentPersona(){return $('persona').value;}
+  function applyVoiceProfile(){
+    const profile=VOICE_PROFILES[currentPersona()]||VOICE_PROFILES['J.A.R.V.I.S.'];
+    $('voiceProfileStatus').textContent='Current profile: '+currentPersona()+' · British English';
+    $('azureVoiceLabel').textContent='Selected voice: '+profile.azure;
+    $('edgeVoiceLabel').textContent='Selected voice: '+profile.edge;
+    $('metricPersona').textContent=currentPersona();
+    $('chatSubtitle').textContent='You are speaking with '+currentPersona();
+  }
+  function collectSettings(){return {
+    persona:currentPersona(),speech_provider:$('speechProvider').value,speech_fallback:$('speechFallback').checked,
+    gemini_key:$('geminiKey').value.trim(),gemini_tts_model:$('geminiModel').value,gemini_voice:(VOICE_PROFILES[currentPersona()]||VOICE_PROFILES['J.A.R.V.I.S.']).gemini,
+    azure_key:$('azureKey').value.trim(),azure_region:$('azureRegion').value.trim(),azure_voice:(VOICE_PROFILES[currentPersona()]||VOICE_PROFILES['J.A.R.V.I.S.']).azure,
+    edge_voice:(VOICE_PROFILES[currentPersona()]||VOICE_PROFILES['J.A.R.V.I.S.']).edge,edge_rate:$('edgeRate').value,
+    chat_provider:$('chatProvider').value,openrouter_key:$('openrouterKey').value.trim(),chat_model:$('chatModel').value.trim(),
+    ollama_url:$('ollamaUrl').value.trim(),ollama_model:$('ollamaModel').value.trim(),ollama_vision_model:$('ollamaVisionModel').value.trim(),ollama_fallback:$('ollamaFallback').checked,openrouter_vision_model:$('openrouterVisionModel').value.trim(),gemini_chat_model:$('geminiChatModel').value.trim(),gemini_image_model:$('geminiImageModel').value.trim(),image_engine:$('imageEngine')?.value||'auto',local_image_api_url:$('localImageApiUrl')?.value.trim()||'',image_aspect_ratio:$('imageAspect').value,image_size:$('imageSize').value,tavily_key:$('tavilyKey').value.trim(),max_tokens:$('maxTokens').value,router_model:$('routerModel')?.value.trim()||"auto",compression_mode:$('compressionMode')?.value||"off"
+  };}
+  // Keep image engine and local endpoint preferences in this browser profile (no API secrets here).
+  const IMAGE_PREFS_KEY='jarvisImagePrefsV223';
+  function loadImagePrefs(){try{const saved=JSON.parse(localStorage.getItem(IMAGE_PREFS_KEY)||'{}');if(saved&&typeof saved==='object'){if(saved.engine&&$('imageEngine'))$('imageEngine').value=saved.engine;if(typeof saved.localUrl==='string'&&$('localImageApiUrl'))$('localImageApiUrl').value=saved.localUrl;if(typeof saved.aspect==='string'&&$('imageAspect'))$('imageAspect').value=saved.aspect;if(typeof saved.size==='string'&&$('imageSize'))$('imageSize').value=saved.size;}}catch(e){}}
+  function saveImagePrefs(){try{localStorage.setItem(IMAGE_PREFS_KEY,JSON.stringify({engine:$('imageEngine').value,localUrl:$('localImageApiUrl').value.trim(),aspect:$('imageAspect').value,size:$('imageSize').value}));}catch(e){}}
+  loadImagePrefs();['imageEngine','localImageApiUrl','imageAspect','imageSize'].forEach(id=>$(id)?.addEventListener('change',saveImagePrefs));
+
+  function updateMetrics(){
+    $('metricPersona').textContent=currentPersona();
+    const provider=$('speechProvider').value;$('metricSpeech').textContent=provider==='auto'?'Auto · UK neural':provider[0].toUpperCase()+provider.slice(1)+' · UK';
+    $('openrouterFields').classList.toggle('hidden',$('chatProvider').value!=='openrouter');
+    $('ollamaFields').classList.toggle('hidden',$('chatProvider').value!=='ollama'&&!$('ollamaFallback').checked);
+    $('geminiChatFields').classList.toggle('hidden',$('chatProvider').value!=='gemini');
+  }
+  function setView(name){document.querySelectorAll('.nav button[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===name));document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id==='view-'+name));}
+  document.querySelectorAll('.nav button[data-view]').forEach(btn=>btn.addEventListener('click',()=>setView(btn.dataset.view)));
+  const selfUpgradeNavBtn=document.getElementById('selfUpgradeNavBtn');
+  if(selfUpgradeNavBtn)selfUpgradeNavBtn.addEventListener('click',()=>window.location.assign('/self-upgrade'));
+  async function refreshHealth(){try{const r=await fetch('/api/status',{cache:'no-store'});if(!r.ok)throw new Error('HTTP '+r.status);const d=await r.json();$('metricUptime').textContent=formatUptime(d.uptime_seconds);$('metricTools').textContent=d.tool_count;$('toolsCountBadge').textContent=d.tool_count+' TOOLS';$('systemStatus').textContent='SYSTEM READY';}catch(e){$('systemStatus').textContent='SERVER OFFLINE';}}
+  function formatUptime(sec){sec=Math.max(0,Number(sec)||0);const h=Math.floor(sec/3600),m=Math.floor(sec%3600/60),s=sec%60;return h?`${h}h ${m}m`:`${m}m ${s}s`;}
+  refreshHealth();setInterval(refreshHealth,7000);
+
+  function showEmpty(){if($('emptyState'))return;$('chatBody').innerHTML='<div class="empty" id="emptyState"><div class="orb">✧</div><strong>At your service.</strong><p>Send a message or use the microphone to dictate.</p></div>';}
+  function addMessage(role,content,options={}){
+    $('emptyState')?.remove();const el=document.createElement('div');el.className='msg '+role+(options.error?' error':'');
+    const tag=document.createElement('div');tag.className='msg-tag';const who=document.createElement('span');who.textContent=role==='user'?'YOU':(options.persona||currentPersona());tag.appendChild(who);
+    if(role==='assistant'&&!options.error){const speak=document.createElement('button');speak.className='speak-one';speak.type='button';speak.textContent='◖ Speak';speak.addEventListener('click',()=>speakText(content));tag.appendChild(speak);}
+    const body=document.createElement('div');body.textContent=content;el.append(tag,body);
+    if(options.imageDataUrl){const img=document.createElement('img');img.className='msg-image';img.src=options.imageDataUrl;img.alt='User attached image';el.appendChild(img);}
+    if(Array.isArray(options.generatedImages)){options.generatedImages.forEach((item,index)=>{if(!item||!item.image_base64||!item.image_mime)return;const img=document.createElement('img');img.className='msg-image';img.alt='AI-generated image '+(index+1);img.src=`data:${item.image_mime};base64,${item.image_base64}`;el.appendChild(img);const link=document.createElement('a');link.className='tool-download';link.href=img.src;link.download=item.filename||'jarvis-generated.png';link.textContent='Save generated image';el.appendChild(link);});}
+    if(Array.isArray(options.generatedFiles)){options.generatedFiles.forEach(item=>{if(!item||!item.file_base64||!item.file_mime||item.file_base64.length>16000000)return;const allowed=['application/pdf','text/plain','text/csv','application/json','application/zip'];if(!allowed.includes(item.file_mime))return;const link=document.createElement('a');link.className='tool-download';link.href=`data:${item.file_mime};base64,${item.file_base64}`;link.download=item.filename||'jarvis-output';link.textContent='Download '+(item.filename||'generated file');el.appendChild(link);});}
+    if(Array.isArray(options.sources)&&options.sources.length){const box=document.createElement('div');box.className='msg-sources';const label=document.createElement('strong');label.textContent='Sources';box.appendChild(label);options.sources.slice(0,8).forEach((source,i)=>{if(!source.url||!/^https?:\/\//i.test(source.url))return;const a=document.createElement('a');a.href=source.url;a.target='_blank';a.rel='noopener noreferrer';a.textContent=`[${i+1}] ${source.title||source.url}`;box.appendChild(a);});el.appendChild(box);}
+    $('chatBody').appendChild(el);$('chatBody').scrollTop=$('chatBody').scrollHeight;
+  }
+  function setBusy(busy){$('sendBtn').disabled=busy;$('sendBtn').innerHTML=busy?'<span class="busy"><i class="spin"></i>Thinking</span>':'Send';$('systemStatus').textContent=busy?'PROCESSING':'SYSTEM READY';}
+  async function sendMessage(){
+    const text=$('messageInput').value.trim();const image=state.image;
+    if((!text&&!image)||$('sendBtn').disabled)return;
+    const prompt=text||(image?'Please analyse this image and describe what you can see.':'');
+    $('messageInput').value='';$('messageInput').style.height='auto';
+    addMessage('user',prompt,{imageDataUrl:image?.preview||null});state.messages.push({role:'user',content:prompt});setBusy(true);
+    try{
+      const persona=currentPersona();const response=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:state.messages,settings:collectSettings(),persona,image:image?{mime_type:image.mime_type,data:image.data}:null,web_search:$('webSearchToggle').checked,tools_enabled:$('aiToolsToggle').checked})});
+      let data={};try{data=await response.json();}catch(e){throw new Error('Server returned an unreadable response.');}
+      if(!response.ok||!data.ok)throw new Error(data.error||'Chat request failed.');
+      const replyPrefix=data.provider==='ollama-local-fallback'?'[Local Ollama fallback] ':data.provider==='offline-core'?'[Offline local core] ':'';
+      state.messages.push({role:'assistant',content:data.reply});addMessage('assistant',replyPrefix+data.reply,{persona,sources:data.sources||[],generatedImages:data.generated_images||[],generatedFiles:data.generated_files||[]});
+      if($('autoSpeak').checked)await speakText(data.reply,{quiet:true});
+    }catch(error){addMessage('assistant','Request failed: '+error.message+'\n\nCheck the selected AI provider, internet connection, and model capabilities.',{persona:currentPersona(),error:true});}
+    finally{state.image=null;$('imageInput').value='';$('imagePreview').classList.add('hidden');$('imagePreviewThumb').src='';setBusy(false);$('messageInput').focus();}
+  }
+  async function imageToPayload(file){
+    if(!file||!file.type.startsWith('image/'))throw new Error('Choose an image file.');
+    if(file.size>14*1024*1024)throw new Error('Choose an image smaller than 14 MB before compression.');
+    const source=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=()=>reject(new Error('Could not read the image.'));reader.readAsDataURL(file);});
+    const img=await new Promise((resolve,reject)=>{const item=new Image();item.onload=()=>resolve(item);item.onerror=()=>reject(new Error('This image format cannot be opened by the browser. Try JPG or PNG.'));item.src=source;});
+    const maxEdge=1600,scale=Math.min(1,maxEdge/Math.max(img.width,img.height));const canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(img.width*scale));canvas.height=Math.max(1,Math.round(img.height*scale));
+    const ctx=canvas.getContext('2d');ctx.fillStyle='#ffffff';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.drawImage(img,0,0,canvas.width,canvas.height);
+    const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/jpeg',0.82));if(!blob)throw new Error('Image compression failed.');
+    const dataUrl=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=()=>reject(new Error('Could not encode image.'));reader.readAsDataURL(blob);});
+    const encoded=String(dataUrl).split(',',2)[1];if(encoded.length>8_500_000)throw new Error('Compressed image is still too large. Choose a smaller picture.');
+    return {mime_type:'image/jpeg',data:encoded,preview:dataUrl,name:file.name||'Attached image'};
+  }
+  $('imageInput').addEventListener('change',async e=>{
+    const file=e.target.files&&e.target.files[0];if(!file)return;
+    try{state.image=await imageToPayload(file);$('imagePreviewThumb').src=state.image.preview;$('imagePreviewName').textContent=state.image.name+' · '+Math.round(state.image.data.length*0.75/1024)+' KB';$('imagePreview').classList.remove('hidden');toast('Image ready for analysis.');}
+    catch(err){state.image=null;$('imagePreview').classList.add('hidden');toast(err.message);e.target.value='';}
+  });
+  $('removeImageBtn').addEventListener('click',()=>{state.image=null;$('imageInput').value='';$('imagePreviewThumb').src='';$('imagePreview').classList.add('hidden');});
+  $('testWebSearchBtn').addEventListener('click',async()=>{
+    const status=$('webSearchStatus');status.textContent='Testing search…';
+    try{const r=await fetch('/api/web/search',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({query:'latest general technology news',settings:collectSettings(),max_results:3})});const d=await r.json();if(!r.ok||!d.ok)throw new Error(d.error||'Search test failed.');status.textContent=`Connected · ${d.provider} · ${(d.results||[]).length} results`;toast('Web search is connected.');}
+    catch(err){status.textContent=err.message;toast(err.message.slice(0,180));}
+  });
+  $('sendBtn').addEventListener('click',sendMessage);
+  $('messageInput').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMessage();}});
+  $('messageInput').addEventListener('input',e=>{e.target.style.height='auto';e.target.style.height=Math.min(e.target.scrollHeight,150)+'px';});
+  $('clearChatBtn').addEventListener('click',()=>{state.messages=[];$('chatBody').innerHTML='';showEmpty();toast('Conversation cleared.');});
+  $('persona').addEventListener('change',()=>{state.messages=[];$('chatBody').innerHTML='';showEmpty();applyVoiceProfile();updateMetrics();toast('Switched to '+currentPersona()+'. Conversation reset.');});
+  ['speechProvider','chatProvider','ollamaFallback'].forEach(id=>$(id).addEventListener('change',updateMetrics));
+  applyVoiceProfile();updateMetrics();
+
+  function stopSpeech(){
+    if('speechSynthesis'in window)window.speechSynthesis.cancel();const player=$('audioPlayer');player.pause();player.removeAttribute('src');player.load();
+    if(state.audioUrl){URL.revokeObjectURL(state.audioUrl);state.audioUrl=null;}
+  }
+  async function getDeviceVoices(){
+    if(!('speechSynthesis'in window))return [];
+    let voices=window.speechSynthesis.getVoices();if(voices.length)return voices;
+    await new Promise(resolve=>{let done=false;const finish=()=>{if(!done){done=true;resolve();}};window.speechSynthesis.addEventListener('voiceschanged',finish,{once:true});setTimeout(finish,900);});
+    return window.speechSynthesis.getVoices();
+  }
+  async function deviceSpeak(text){
+    if(!('speechSynthesis'in window))throw new Error('Browser speech is not supported.');
+    const voices=await getDeviceVoices();const utter=new SpeechSynthesisUtterance(text);const british=voices.find(v=>/^en-GB/i.test(v.lang))||voices.find(v=>/British|United Kingdom/i.test(v.name));
+    if(british)utter.voice=british;utter.lang='en-GB';utter.rate=currentPersona()==='F.R.I.D.A.Y.'?1.0:0.94;utter.pitch=currentPersona()==='E.D.I.T.H.'?0.88:0.96;
+    await new Promise((resolve,reject)=>{utter.onend=resolve;utter.onerror=e=>reject(new Error(e.error||'Device voice failed.'));window.speechSynthesis.cancel();window.speechSynthesis.speak(utter);});
+  }
+  async function speakText(text,options={}){
+    if(!text||!text.trim())return null;const status=$('voiceStatus');if(!options.quiet)status.textContent='Generating '+currentPersona()+' voice…';stopSpeech();
+    let cloudError=null;
+    try{
+      const response=await fetch('/api/tts',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:text.slice(0,12000),settings:collectSettings(),persona:currentPersona()})});
+      if(!response.ok){let data={};try{data=await response.json();}catch(e){}const details=(data.attempts||[]).join(' | ');throw new Error((data.error||'Speech provider failed.')+(details?' '+details:''));}
+      const blob=await response.blob();if(!blob.size)throw new Error('Speech provider returned an empty audio file.');
+      state.audioUrl=URL.createObjectURL(blob);const player=$('audioPlayer');player.src=state.audioUrl;player.classList.remove('hidden');
+      try{await player.play();const provider=response.headers.get('X-JARVIS-TTS-Provider')||'cloud';if(!options.quiet)status.textContent='Speaking with '+provider.toUpperCase()+'.';return provider;}
+      catch(playError){cloudError=new Error('Browser blocked automatic audio playback.');}
+    }catch(error){cloudError=error;}
+    if($('deviceFallback').checked){try{await deviceSpeak(text);if(!options.quiet)status.textContent='Speaking with the phone’s British voice.';return 'device';}catch(deviceError){cloudError=new Error((cloudError?.message||'Cloud speech failed.')+' Device voice: '+deviceError.message);}}
+    if(!options.quiet)status.textContent=cloudError?.message||'Speech unavailable.';
+    if(!options.quiet)toast((cloudError?.message||'Speech unavailable.').slice(0,180));return null;
+  }
+  $('testVoiceBtn').addEventListener('click',()=>speakText($('testText').value.trim()));
+  $('stopVoiceBtn').addEventListener('click',()=>{stopSpeech();$('voiceStatus').textContent='Speech stopped.';});
+
+  const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
+  $('micBtn').addEventListener('click',()=>{
+    if(!SpeechRecognition){toast('Voice input is not supported by this browser. Try Chrome.');return;}
+    if(state.recognition){state.recognition.stop();state.recognition=null;return;}
+    const rec=new SpeechRecognition();state.recognition=rec;rec.lang='en-GB';rec.interimResults=true;rec.continuous=false;
+    $('micBtn').textContent='Stop';$('systemStatus').textContent='LISTENING';
+    rec.onresult=e=>{let value='';for(let i=e.resultIndex;i<e.results.length;i++)value+=e.results[i][0].transcript;$('messageInput').value=value;$('messageInput').dispatchEvent(new Event('input'));};
+    rec.onerror=e=>toast('Microphone: '+e.error);
+    rec.onend=()=>{state.recognition=null;$('micBtn').textContent='⌁';$('systemStatus').textContent='SYSTEM READY';$('messageInput').focus();};
+    try{rec.start();}catch(e){state.recognition=null;$('micBtn').textContent='⌁';toast('Could not start microphone.');}
+  });
+
+  const TOOL_PAGE_SIZE = 60;
+  let toolVisibleCount = TOOL_PAGE_SIZE;
+  function chooseCategory(category, reset=true){
+    state.activeCategory=category;
+    $('toolCategory').value=category;
+    document.querySelectorAll('.category-btn').forEach(b=>b.classList.toggle('active',b.dataset.category===category));
+    if(reset) toolVisibleCount=TOOL_PAGE_SIZE;
+    renderTools();
+  }
+  $('toolCategory').addEventListener('change',()=>chooseCategory($('toolCategory').value));
+  $('toolSearch').addEventListener('input',()=>{toolVisibleCount=TOOL_PAGE_SIZE;renderTools();});
+  $('loadMoreTools').addEventListener('click',()=>{toolVisibleCount+=TOOL_PAGE_SIZE;renderTools(false);});
+  function renderTools(updateCount=true){
+    const q=$('toolSearch').value.trim().toLowerCase();
+    const filtered=state.tools.filter(t=>(state.activeCategory==='all'||t.category===state.activeCategory)&&(!q||(t.name+' '+t.description+' '+t.id+' '+t.category).toLowerCase().includes(q)));
+    const shown=filtered.slice(0,toolVisibleCount);
+    $('toolCountLabel').textContent=`Showing ${shown.length} of ${filtered.length} matches · ${state.tools.length} total tools`;
+    const list=$('toolList');list.innerHTML='';
+    if(!filtered.length){const empty=document.createElement('div');empty.className='empty';empty.textContent='No tools match this search.';list.appendChild(empty);$('loadMoreTools').hidden=true;return;}
+    shown.forEach(tool=>{
+      const card=document.createElement('article');card.className='tool';
+      const title=document.createElement('strong');title.textContent=tool.name;
+      const desc=document.createElement('small');desc.textContent=tool.description;
+      const meta=document.createElement('div');meta.className='tool-meta';
+      const tag=document.createElement('span');tag.className='tool-tag';tag.textContent=tool.category.replaceAll('_',' ');
+      const btn=document.createElement('button');btn.className='btn secondary';btn.textContent='Open';btn.addEventListener('click',()=>selectTool(tool));
+      meta.append(tag,btn);card.append(title,desc,meta);list.appendChild(card);
+    });
+    $('loadMoreTools').hidden=shown.length>=filtered.length;
+    $('loadMoreTools').textContent=`Load next ${Math.min(TOOL_PAGE_SIZE,filtered.length-shown.length)} tools`;
+  }
+  function buildToolCategories(categories){
+    const select=$('toolCategory');select.innerHTML='';
+    const all=document.createElement('option');all.value='all';all.textContent='All categories';select.appendChild(all);
+    const quick=$('categoryQuickFilters');quick.innerHTML='';
+    const allButton=document.createElement('button');allButton.className='category-btn active';allButton.dataset.category='all';allButton.textContent='All';allButton.addEventListener('click',()=>chooseCategory('all'));quick.appendChild(allButton);
+    categories.filter(c=>c!=='all').forEach(category=>{
+      const option=document.createElement('option');option.value=category;option.textContent=category.replaceAll('_',' ').replace(/\b\w/g,m=>m.toUpperCase());select.appendChild(option);
+      const button=document.createElement('button');button.className='category-btn';button.dataset.category=category;button.textContent=category.replaceAll('_',' ');button.addEventListener('click',()=>chooseCategory(category));quick.appendChild(button);
+    });
+  }
+  function selectTool(tool){
+    state.selectedTool=tool;state.lastToolResult=null;$('selectedToolLabel').textContent=tool.name;$('toolStatus').textContent=tool.description;$('toolOutput').textContent='Fill in the fields, then press Run tool.';$('copyToolBtn').disabled=true;$('runToolBtn').disabled=false;
+    const form=$('toolForm');form.innerHTML='';const fields=tool.fields||[];
+    if(!fields.length){const info=document.createElement('div');info.className='result';info.textContent='No input is required.';form.appendChild(info);}
+    fields.forEach(field=>{const wrap=document.createElement('div');wrap.className='tool-input'+(field.type==='textarea'?' full':'');const label=document.createElement('label');label.className='label';label.textContent=field.label;label.htmlFor='tool-field-'+field.name;let input;
+      if(field.type==='textarea'){input=document.createElement('textarea');input.className='field';input.rows=3;}else{input=document.createElement('input');input.className='field';input.type=field.type==='file'?'file':(['number','date','password'].includes(field.type)?field.type:'text');if(field.type==='file'){input.accept=field.accept||(field.name==='image'?'image/*':((field.name==='pdf'||field.name==='pdf_a'||field.name==='pdf_b')?'.pdf,application/pdf':(field.name==='audio'?'.wav,audio/wav':'*/*')));input.dataset.fileField='1';}}
+      input.id='tool-field-'+field.name;input.name=field.name;if(field.type!=='file')input.value=field.default??'';input.placeholder=field.placeholder||'';wrap.append(label,input);form.appendChild(wrap);
+    });
+    $('toolArgs').value=tool.example||'{}';$('toolRunner').scrollIntoView({behavior:'smooth',block:'nearest'});
+  }
+  async function getFormArgs(){const out={};for(const el of $('toolForm').querySelectorAll('input,textarea,select')){if(el.type==='file'){const file=el.files&&el.files[0];if(!file)continue;if(file.size>12*1024*1024)throw new Error('Choose a file smaller than 12 MB.');const dataUrl=await new Promise((resolve,reject)=>{const reader=new FileReader();reader.onload=()=>resolve(reader.result);reader.onerror=()=>reject(new Error('Could not read selected file.'));reader.readAsDataURL(file);});out[el.name]={name:file.name,mime_type:file.type||'application/octet-stream',data:String(dataUrl).split(',',2)[1]};}else if(el.value!=='')out[el.name]=el.type==='number'?Number(el.value):el.value;}return out;}
+  function renderToolResult(result){
+    const out=$('toolOutput');out.innerHTML='';
+    const safe={...result};delete safe.image_base64;delete safe.file_base64;
+    const pre=document.createElement('pre');pre.textContent=JSON.stringify(safe,null,2);out.appendChild(pre);
+    if(result&&typeof result.image_base64==='string'&&result.image_mime){
+      const img=document.createElement('img');img.className='tool-output-media';img.alt=result.filename||'Generated image';img.src=`data:${result.image_mime};base64,${result.image_base64}`;out.appendChild(img);
+      const link=document.createElement('a');link.className='tool-download';link.href=img.src;link.download=result.filename||'jarvis-image.png';link.textContent='Download image';out.appendChild(link);
+    }
+    if(result&&typeof result.file_base64==='string'&&result.file_mime){
+      const link=document.createElement('a');link.className='tool-download';link.href=`data:${result.file_mime};base64,${result.file_base64}`;link.download=result.filename||'jarvis-output.pdf';link.textContent='Download generated file';out.appendChild(link);
+    }
+  }
+  $('runToolBtn').addEventListener('click',async()=>{
+    if(!state.selectedTool){$('toolStatus').textContent='Select a tool first.';return;}
+    let args;if($('toolArgs').closest('details').open){try{args=JSON.parse($('toolArgs').value||'{}');}catch(e){$('toolStatus').textContent='Invalid JSON: '+e.message;return;}}else {try{args=await getFormArgs();}catch(fileError){$('toolStatus').textContent=fileError.message;return;}}
+    if(!args||typeof args!=='object'||Array.isArray(args)){$('toolStatus').textContent='Arguments must be a JSON object.';return;}
+    $('runToolBtn').disabled=true;$('toolStatus').textContent='Running locally…';$('toolOutput').textContent='';
+    try{const response=await fetch('/api/tools/run',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({tool:state.selectedTool.id,args,settings:collectSettings()})});const data=await response.json();if(!response.ok||!data.ok)throw new Error(data.error||'Tool failed.');state.lastToolResult=data.result;renderToolResult(data.result);$('toolStatus').textContent='Completed successfully.';$('copyToolBtn').disabled=false;}
+    catch(error){$('toolOutput').textContent=error.message;$('toolStatus').textContent='Tool failed.';}
+    finally{$('runToolBtn').disabled=false;}
+  });
+  $('resetToolBtn').addEventListener('click',()=>{if(state.selectedTool)selectTool(state.selectedTool);else{$('toolForm').innerHTML='';$('toolArgs').value='{}';$('toolStatus').textContent='Choose a tool above.';}});
+  $('copyToolBtn').addEventListener('click',async()=>{if(state.lastToolResult===null)return;const text=JSON.stringify(state.lastToolResult,null,2);try{await navigator.clipboard.writeText(text);toast('Result copied.');}catch(e){$('toolOutput').focus();toast('Clipboard not available in this browser.');}});
+  async function loadTools(){try{const response=await fetch('/api/tools',{cache:'no-store'});if(!response.ok)throw new Error('HTTP '+response.status);const data=await response.json();state.tools=data.tools||[];buildToolCategories(data.categories||[]);$('metricTools').textContent=state.tools.length;$('toolsCountBadge').textContent=state.tools.length+' TOOLS';renderTools();}catch(error){$('toolList').textContent='Could not load tools: '+error.message;$('toolCountLabel').textContent='Local toolkit unavailable.';}}
+  // Ollama connection test for the configurable local backup model.
+  $('testOllamaBtn').addEventListener('click',async()=>{
+    $('ollamaStatus').textContent='Checking local model…';
+    try{const r=await fetch('/api/ollama/test',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({settings:collectSettings()})});const d=await r.json();if(!r.ok||!d.ok)throw new Error(d.error||'Ollama test failed.');$('ollamaStatus').textContent=`Connected · ${d.count} model(s)${d.models.length?' · '+d.models.slice(0,3).join(', '):''}`;toast('Ollama is reachable.');}
+    catch(e){$('ollamaStatus').textContent=e.message;toast(e.message.slice(0,170));}
+  });
+  $('openLocalSettingsBtn').addEventListener('click',()=>{setView('voice');$('chatProvider').value='ollama';updateMetrics();$('ollamaUrl').focus();});
+
+  // Image creation studio.
+  $('generateImageBtn').addEventListener('click',async()=>{
+    const prompt=$('imagePrompt').value.trim();if(!prompt){toast('Enter an image prompt first.');return;}
+    $('generateImageBtn').disabled=true;$('imageGenStatus').textContent='Generating image…';$('imageGenOutput').textContent='The image model is working. This can take a little while.';
+    try{
+      const settings=collectSettings();settings.image_aspect_ratio=$('imageAspect').value;settings.image_size=$('imageSize').value;settings.gemini_image_model=$('geminiImageModel').value.trim();settings.image_engine=$('imageEngine').value;settings.local_image_api_url=$('localImageApiUrl').value.trim();
+      const r=await fetch('/api/image/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt,settings})});const d=await r.json();if(!r.ok||!d.ok)throw new Error(d.error||'Image generation failed.');
+      const box=$('imageGenOutput');box.innerHTML='';const img=document.createElement('img');img.alt='Generated image';img.src=`data:${d.image_mime};base64,${d.image_base64}`;box.appendChild(img);
+      const link=document.createElement('a');link.className='tool-download';link.href=img.src;link.download=d.filename||'jarvis-generated.png';link.textContent='Save generated image';box.appendChild(link);if(d.text){const note=document.createElement('p');note.textContent=d.text;box.appendChild(note);}
+      $('imageGenStatus').textContent='Generated by '+(d.provider||'image engine')+'.';toast('Image generated.');
+    }catch(e){$('imageGenStatus').textContent=e.message;$('imageGenOutput').textContent=e.message;toast(e.message.slice(0,180));}
+    finally{$('generateImageBtn').disabled=false;}
+  });
+
+  // Local image model test and selectable generation engines.
+  $('testLocalImageBtn').addEventListener('click',async()=>{
+    $('localImageStatus').textContent='Checking local image API…';
+    try{const r=await fetch('/api/image/local/test',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({settings:collectSettings()})});const d=await r.json();if(!r.ok||!d.ok)throw new Error(d.error||'Local image API test failed.');$('localImageStatus').textContent=`Connected · ${d.samplers} sampler(s)`;toast('Local image model server is reachable.');}
+    catch(e){$('localImageStatus').textContent=e.message;toast(e.message.slice(0,160));}
+  });
+
+  // SVG builder uses the same backend validator as the local tool catalogue.
+  $('buildSvgBtn').addEventListener('click',async()=>{
+    const source=$('svgSourceInput').value.trim();if(!source){toast('Paste SVG source first.');return;}
+    $('buildSvgBtn').disabled=true;$('svgBuildStatus').textContent='Validating SVG…';$('svgBuildOutput').textContent='Checking SVG structure and blocked content…';
+    try{
+      const r=await fetch('/api/tools/run',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({tool:'svg_builder',args:{svg:source,filename:'jarvis-vector.svg'},settings:collectSettings()})});
+      const d=await r.json();if(!r.ok||!d.ok)throw new Error(d.error||'SVG validation failed.');
+      const result=d.result;const box=$('svgBuildOutput');box.innerHTML='';
+      const img=document.createElement('img');img.alt='Validated SVG preview';img.src=`data:${result.image_mime};base64,${result.image_base64}`;box.appendChild(img);
+      const link=document.createElement('a');link.className='tool-download';link.href=img.src;link.download=result.filename||'jarvis-vector.svg';link.textContent='Download SVG';box.appendChild(link);
+      $('svgBuildStatus').textContent=`Valid SVG · ${result.bytes} bytes · ${result.sha256.slice(0,12)}`;toast('SVG validated and built.');
+    }catch(e){$('svgBuildStatus').textContent=e.message;$('svgBuildOutput').textContent=e.message;toast(e.message.slice(0,160));}
+    finally{$('buildSvgBtn').disabled=false;}
+  });
+
+  // Non-identifying face presence/count analysis. Never performs identity matching.
+  let faceImagePayload=null;
+  $('faceImageInput').addEventListener('change',async e=>{
+    const file=e.target.files&&e.target.files[0];faceImagePayload=null;if(!file){$('faceStatus').textContent='No image selected.';return;}
+    try{faceImagePayload=await imageToPayload(file);$('faceStatus').textContent=file.name+' ready.';}
+    catch(err){$('faceStatus').textContent=err.message;e.target.value='';}
+  });
+  $('detectFacesBtn').addEventListener('click',async()=>{
+    if(!faceImagePayload){toast('Choose an image first.');return;}
+    $('detectFacesBtn').disabled=true;$('faceStatus').textContent='Checking visible face regions…';$('faceOutput').textContent='Analysing image with the selected vision model…';
+    try{const r=await fetch('/api/vision/face-detect',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({image:{mime_type:faceImagePayload.mime_type,data:faceImagePayload.data},settings:collectSettings()})});const d=await r.json();if(!r.ok||!d.ok)throw new Error(d.error||'Face detection failed.');
+      const shown=d.result?JSON.stringify(d.result,null,2):d.raw; $('faceOutput').textContent='Provider: '+d.provider+'\nNon-identifying face detection only\n\n'+shown;$('faceStatus').textContent=d.result?'Detected '+(d.result.face_count??'an unknown number of')+' face(s).':'Analysis returned; see result.';
+    }catch(e){$('faceStatus').textContent=e.message;$('faceOutput').textContent=e.message;}
+    finally{$('detectFacesBtn').disabled=false;}
+  });
+
+  // Local JARVIS link QR. 127.0.0.1 is only this phone, by design.
+  $('makeLocalQrBtn').addEventListener('click',async()=>{
+    $('qrStatus').textContent='Creating QR…';$('qrOutput').textContent='';
+    try{const r=await fetch('/api/qr/local');const d=await r.json();if(!r.ok||!d.ok)throw new Error(d.error||'QR generation failed.');const img=document.createElement('img');img.className='qr-preview';img.alt='QR code for JARVIS on this phone';img.src=`data:${d.qr.image_mime};base64,${d.qr.image_base64}`;$('qrOutput').appendChild(img);const cap=document.createElement('div');cap.textContent=d.url;$('qrOutput').appendChild(cap);const link=document.createElement('a');link.className='tool-download';link.href=img.src;link.download='jarvis-local-link.png';link.textContent='Save QR image';$('qrOutput').appendChild(link);$('qrStatus').textContent='QR created.';}
+    catch(e){$('qrStatus').textContent=e.message;$('qrOutput').textContent=e.message;}
+  });
+
+  // 100 built-in roles + up to 100 custom profiles. Up to eight run per task.
+  const AGENT_STORAGE='jarvis_agents_v220';
+  let agentProfiles=[];
+  let agentCatalog=[];
+  function saveAgentProfiles(){
+    try{const customs=agentProfiles.filter(a=>a&&a.custom).slice(0,100);localStorage.setItem(AGENT_STORAGE,JSON.stringify(customs));$('agentSaveStatus').textContent='Custom agent profiles saved in this browser.';}
+    catch(e){$('agentSaveStatus').textContent='Browser storage unavailable; agent edits may not persist.';}
+  }
+  async function loadAgentProfiles(){
+    try{const r=await fetch('/api/agents',{cache:'no-store'});const d=await r.json();agentCatalog=Array.isArray(d.agents)?d.agents:[];}catch(e){agentCatalog=[];}
+    let stored=[];try{const raw=localStorage.getItem(AGENT_STORAGE);if(raw)stored=JSON.parse(raw);}catch(e){}
+    const customs=(Array.isArray(stored)?stored:[]).filter(a=>a&&a.custom).slice(0,100);
+    agentProfiles=[...agentCatalog.map(a=>({...a,custom:false})),...customs];renderAgentProfiles();
+  }
+  function renderAgentProfiles(){
+    const list=$('agentList');if(!list)return;list.innerHTML='';
+    const query=($('agentSearch')?.value||'').trim().toLowerCase();
+    const filtered=agentProfiles.filter(a=>(a.name+' '+a.role+' '+(a.keywords||'')).toLowerCase().includes(query));
+    filtered.slice(0,200).forEach(a=>{
+      const label=document.createElement('label');label.className='agent-option';
+      const cb=document.createElement('input');cb.type='checkbox';cb.value=a.id;cb.className='agent-select';
+      const body=document.createElement('span');const strong=document.createElement('strong');strong.textContent=a.name;const small=document.createElement('small');small.textContent=a.role+(a.provider_id&&a.provider_id!=='auto'?' · '+a.provider_id:' · Router auto');body.append(strong,small);label.append(cb,body);
+      if(a.custom){const del=document.createElement('button');del.type='button';del.className='btn ghost';del.textContent='×';del.title='Remove custom agent';del.addEventListener('click',ev=>{ev.preventDefault();agentProfiles=agentProfiles.filter(x=>x.id!==a.id);saveAgentProfiles();renderAgentProfiles();});label.appendChild(del);}
+      list.appendChild(label);
+    });
+    if(!filtered.length){const empty=document.createElement('div');empty.className='result';empty.textContent='No matching roles.';list.appendChild(empty);}
+    const customCount=agentProfiles.filter(a=>a.custom).length;
+    $('agentCountBadge').textContent=(agentCatalog.length||100)+' BUILT-IN · '+customCount+'/100 CUSTOM';
+    $('agentLimitNote').textContent=(agentCatalog.length||100)+' built-in roles + '+customCount+'/100 custom profiles · choose up to 20 per task. Auto-select chooses up to eight.';
+  }
+  $('agentSearch').addEventListener('input',renderAgentProfiles);
+  loadAgentProfiles();
+  $('addAgentBtn').addEventListener('click',()=>{
+    if(agentProfiles.filter(a=>a.custom).length>=100){toast('Maximum of 100 custom agent profiles reached. The 100 built-in roles remain available.');return;}
+    const name=$('newAgentName').value.trim(),role=$('newAgentRole').value.trim(),prompt=$('newAgentPrompt').value.trim();
+    const providerId=$('newAgentProvider').value.trim()||'auto',model=$('newAgentModel').value.trim()||'auto';
+    if(!name||!role||!prompt){toast('Enter the agent name, role and instructions.');return;}
+    agentProfiles.push({id:'custom_'+Date.now().toString(36),name,role,prompt,provider_id:providerId,model,custom:true});saveAgentProfiles();renderAgentProfiles();
+    $('newAgentName').value='';$('newAgentRole').value='';$('newAgentPrompt').value='';toast('Custom agent added.');
+  });
+  $('runAgentsBtn').addEventListener('click',async()=>{
+    const auto=$('agentAutoSelect').checked;
+    const selected=auto?[]:[...document.querySelectorAll('.agent-select:checked')].map(cb=>agentProfiles.find(a=>a.id===cb.value)).filter(Boolean).slice(0,20);
+    const task=$('agentTask').value.trim();if(!task){toast('Enter a task first.');return;}if(!auto&&!selected.length){toast('Select agents or enable automatic role selection.');return;}
+    $('runAgentsBtn').disabled=true;$('agentRunStatus').textContent=auto?'Selecting relevant roles…':'Agents are working…';$('agentResults').innerHTML='';
+    try{const r=await fetch('/api/agents/run',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({task,agents:selected,custom_agents:agentProfiles.filter(a=>a.custom).slice(0,100),auto_select:auto,settings:collectSettings()})});const d=await r.json();if(!r.ok||!d.ok)throw new Error(d.error||'Agent run failed.');
+      d.results.forEach(item=>{const box=document.createElement('div');box.className='agent-result';const title=document.createElement('strong');title.textContent=item.name+' · '+(item.ok?'via '+item.provider:'failed');box.appendChild(title);const body=document.createElement('div');body.textContent=item.ok?item.answer:item.error;box.appendChild(body);$('agentResults').appendChild(box);});
+      $('agentRunStatus').textContent=d.count+' agent(s) returned'+(d.auto_selected?' · roles auto-selected':'');toast('Agent run completed.');
+    }catch(e){$('agentRunStatus').textContent=e.message;toast(e.message.slice(0,180));}
+    finally{$('runAgentsBtn').disabled=false;}
+  });
+
+  // Omni Router provider pool; secrets are synchronized only to this loopback server.
+  let routerProviders=[];let providerTemplates=[];let gatewayToken='';
+  const ROUTER_STORAGE='jarvis_router_providers_v220';
+  const TEMPLATE_DEFAULTS={
+    openai:['OpenAI','openai','https://api.openai.com/v1','gpt-model-id','api','openai'],
+    anthropic:['Anthropic','anthropic','https://api.anthropic.com/v1','claude-model-id','subscription','anthropic'],
+    gemini:['Gemini','gemini','https://generativelanguage.googleapis.com/v1beta/openai','gemini-3.8-flash','api','openai'],
+    openrouter:['OpenRouter','openrouter','https://openrouter.ai/api/v1','xiaomi/mimo-v2.6-flash','api','openai'],
+    deepseek:['DeepSeek','deepseek','https://api.deepseek.com/v1','deepseek-chat','api','openai'],
+    groq:['Groq','groq','https://api.groq.com/openai/v1','llama-model-id','free','openai'],
+    together:['Together AI','together','https://api.together.xyz/v1','model-id','api','openai'],
+    fireworks:['Fireworks AI','fireworks','https://api.fireworks.ai/inference/v1','accounts/fireworks/models/model-id','api','openai'],
+    cerebras:['Cerebras','cerebras','https://api.cerebras.ai/v1','model-id','free','openai'],
+    mistral:['Mistral','mistral','https://api.mistral.ai/v1','mistral-model-id','api','openai'],
+    xai:['xAI','xai','https://api.x.ai/v1','grok-model-id','api','openai'],
+    ollama:['Ollama local','ollama','http://127.0.0.1:11434/v1','llama3.2','free','openai'],
+    lmstudio:['LM Studio','lmstudio','http://127.0.0.1:1234/v1','local-model-id','free','openai'],
+    custom:['Custom provider','custom-'+Date.now().toString(36),'https://example.com/v1','model-id','api','openai']
+  };
+  async function refreshGatewayStatus(){
+    try{const r=await fetch('/api/gateway/status',{cache:'no-store'});const d=await r.json();if(!r.ok||!d.ok)throw new Error(d.error||'Router status unavailable.');
+      gatewayToken=d.token||'';$('gatewayBaseUrl').value=d.base_url;$('gatewayToken').value=gatewayToken;
+      if(!routerProviders.length&&Array.isArray(d.providers))routerProviders=d.providers.map(x=>({...x,api_key:''}));
+      $('gatewayStatus').textContent='Local gateway ready · '+(d.providers||[]).length+' saved provider(s)';$('routerProviderBadge').textContent=(d.providers||[]).length+' PROVIDERS';renderRouterProviders();
+    }catch(e){$('gatewayStatus').textContent=e.message;}
+  }
+  function renderRouterProviders(){
+    const box=$('routerProviderList');box.innerHTML='';$('routerProviderBadge').textContent=routerProviders.filter(x=>x.enabled).length+' ENABLED';
+    if(!routerProviders.length){box.textContent='No saved providers yet. Add one or import your old settings.';return;}
+    const tierRank={subscription:1,api:2,cheap:3,free:4};
+    [...routerProviders].sort((a,b)=>(tierRank[a.tier]||2)-(tierRank[b.tier]||2)||(a.priority||50)-(b.priority||50)).forEach(p=>{
+      const card=document.createElement('div');card.className='router-provider';const top=document.createElement('div');top.className='router-provider-top';const title=document.createElement('strong');title.textContent=p.name+' · '+p.id;const enabled=document.createElement('input');enabled.type='checkbox';enabled.checked=p.enabled!==false;enabled.title='Enable provider';enabled.addEventListener('change',()=>{p.enabled=enabled.checked;saveRouterProviders(false);renderRouterProviders();});top.append(title,enabled);
+      const small=document.createElement('small');small.textContent=p.model+' · '+p.tier+' tier · priority '+(p.priority||50)+' · '+(p.has_key||p.api_key?'key saved':'no key');
+      const url=document.createElement('small');url.textContent=p.base_url;
+      const modelRow=document.createElement('div');modelRow.className='router-model-row';const modelSelect=document.createElement('select');modelSelect.className='field';modelSelect.setAttribute('aria-label','Select model for '+p.name);const current=document.createElement('option');current.value=p.model;current.textContent='Current: '+p.model;modelSelect.appendChild(current);modelSelect.addEventListener('change',()=>{if(modelSelect.value){p.model=modelSelect.value;saveRouterProviders(false);renderRouterProviders();}});const loadModels=document.createElement('button');loadModels.className='btn ghost';loadModels.type='button';loadModels.textContent='Load models';loadModels.addEventListener('click',async()=>{loadModels.disabled=true;loadModels.textContent='Loading…';try{const mr=await fetch('/api/gateway/provider-models/'+encodeURIComponent(p.id),{cache:'no-store'});const md=await mr.json();if(!mr.ok||!md.ok)throw new Error(md.error||'Model list unavailable.');const models=Array.isArray(md.models)?md.models:[];modelSelect.innerHTML='';const unique=[...new Set([p.model,...models].filter(Boolean))];unique.forEach(id=>{const option=document.createElement('option');option.value=id;option.textContent=id+(id===p.model?' · current':'');modelSelect.appendChild(option);});if(models.length){modelSelect.value=models.includes(p.model)?p.model:models[0];p.model=modelSelect.value;await saveRouterProviders(false);$('routerSaveStatus').textContent=models.length+' model(s) loaded for '+p.id+'. Select another model above to switch.';}else{$('routerSaveStatus').textContent=md.note||'No models were returned.';}}catch(e){$('routerSaveStatus').textContent=e.message;}finally{loadModels.disabled=false;loadModels.textContent='Load models';}});modelRow.append(modelSelect,loadModels);const actions=document.createElement('div');actions.className='router-provider-actions';const test=document.createElement('button');test.className='btn secondary';test.type='button';test.textContent='Test';test.addEventListener('click',()=>testRouterProvider(p.id));const remove=document.createElement('button');remove.className='btn danger';remove.type='button';remove.textContent='Remove';remove.addEventListener('click',()=>{routerProviders=routerProviders.filter(x=>x.id!==p.id);renderRouterProviders();saveRouterProviders(false);});actions.append(test,remove);card.append(top,small,url,modelRow,actions);box.appendChild(card);
+    });
+  }
+  async function saveRouterProviders(show=true){
+    try{const r=await fetch('/api/gateway/providers/save',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({providers:routerProviders})});const d=await r.json();if(!r.ok||!d.ok)throw new Error(d.error||'Could not save provider pool.');
+      routerProviders=d.providers.map(x=>({...x,api_key:'',has_key:x.has_key}));
+      // Keep API keys in local browser storage too, as an optional backup.
+      localStorage.setItem(ROUTER_STORAGE,JSON.stringify(routerProviders.map(x=>({...x,api_key:''}))));
+      $('routerSaveStatus').textContent=d.count+' provider(s) saved locally.';renderRouterProviders();if(show)toast('Provider pool saved.');return true;
+    }catch(e){$('routerSaveStatus').textContent=e.message;toast(e.message.slice(0,180));return false;}
+  }
+  async function testRouterProvider(id){
+    $('routerSaveStatus').textContent='Testing '+id+'…';
+    try{await saveRouterProviders(false);const r=await fetch('/api/gateway/providers/test',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({id})});const d=await r.json();if(!r.ok||!d.ok)throw new Error(d.error||'Provider test failed.');$('routerSaveStatus').textContent=id+' connected · '+d.model;toast(id+' connection successful.');}
+    catch(e){$('routerSaveStatus').textContent=e.message;toast(e.message.slice(0,180));}
+  }
+  function fillProviderTemplate(){
+    const d=TEMPLATE_DEFAULTS[$('providerTemplate').value]||TEMPLATE_DEFAULTS.custom;
+    $('providerName').value=d[0];$('providerId').value=d[1];$('providerBaseUrl').value=d[2];$('providerModel').value=d[3];$('providerTier').value=d[4];$('providerPriority').value='50';
+    $('providerKey').value='';$('providerVision').checked=true;$('providerTools').checked=true;$('providerFormStatus').textContent='Enter your exact model ID and API key.';
+  }
+  $('providerTemplate').addEventListener('change',fillProviderTemplate);
+  $('addProviderBtn').addEventListener('click',async()=>{
+    const item={id:$('providerId').value.trim().toLowerCase(),name:$('providerName').value.trim(),base_url:$('providerBaseUrl').value.trim(),api_key:$('providerKey').value.trim(),model:$('providerModel').value.trim(),tier:$('providerTier').value,priority:Number($('providerPriority').value)||50,kind:$('providerTemplate').value==='anthropic'?'anthropic':'openai',enabled:true,supports_vision:$('providerVision').checked,supports_tools:$('providerTools').checked};
+    if(!item.id||!item.name||!item.base_url||!item.model){toast('Fill in provider ID, name, base URL and model.');return;}
+    const ix=routerProviders.findIndex(x=>x.id===item.id);if(ix>=0){if(!item.api_key)item.api_key=routerProviders[ix].api_key||'';routerProviders[ix]={...routerProviders[ix],...item};}else routerProviders.push(item);
+    if(routerProviders.length>80){routerProviders=routerProviders.slice(0,80);toast('Provider limit is 80 connections.');}
+    renderRouterProviders();const ok=await saveRouterProviders(false);if(ok){$('providerFormStatus').textContent='Provider added and saved.';$('providerKey').value='';toast('Provider added to the fallback pool.');}
+  });
+  $('saveRouterProvidersBtn').addEventListener('click',()=>saveRouterProviders(true));
+  $('refreshGatewayBtn').addEventListener('click',refreshGatewayStatus);
+  $('showGatewayTokenBtn').addEventListener('click',()=>{$('gatewayToken').type=$('gatewayToken').type==='password'?'text':'password';});
+  $('copyGatewayConfigBtn').addEventListener('click',()=>{const text='Base URL: '+$('gatewayBaseUrl').value+'\nAPI Key: '+gatewayToken+'\nModel: auto';if(navigator.clipboard?.writeText)navigator.clipboard.writeText(text).then(()=>toast('Gateway details copied.')).catch(()=>toast('Clipboard unavailable.'));else toast('Clipboard unavailable in this browser.');});
+  $('syncOldKeysBtn').addEventListener('click',async()=>{
+    const legacy=[];
+    const add=(id,name,url,key,model,tier,kind='openai')=>{if(!key)return;legacy.push({id,name,base_url:url,api_key:key,model,tier,priority:50,kind,enabled:true,supports_vision:true,supports_tools:true});};
+    add('openrouter-legacy','OpenRouter (legacy settings)','https://openrouter.ai/api/v1',$('openrouterKey').value.trim(),$('chatModel').value.trim()||'xiaomi/mimo-v2.6-flash','api');
+    add('gemini-legacy','Gemini (legacy settings)','https://generativelanguage.googleapis.com/v1beta/openai',$('geminiKey').value.trim(),$('geminiChatModel').value.trim()||'gemini-3.8-flash','api');
+    const existing=new Set(routerProviders.map(x=>x.id));legacy.forEach(x=>{if(!existing.has(x.id))routerProviders.push(x);});
+    if(!legacy.length){toast('Enter an existing OpenRouter or Gemini key in Voice & AI first.');return;}
+    renderRouterProviders();await saveRouterProviders(true);
+  });
+  $('refreshGatewayBtn').addEventListener('click',refreshGatewayStatus);
+  // Restore browser copy if the local server has no configured providers yet.
+  (async()=>{try{const raw=localStorage.getItem(ROUTER_STORAGE);if(raw){const saved=JSON.parse(raw);if(Array.isArray(saved)&&saved.length)routerProviders=saved;}}catch(e){}await refreshGatewayStatus();if(routerProviders.length)renderRouterProviders();})();
+
+  loadTools();
+  window.JARVIS_getSettings = collectSettings;
+})();
+</script>
+
+<script>
+(()=>{
+  const $id=id=>document.getElementById(id);
+  const settings=()=>window.JARVIS_getSettings?window.JARVIS_getSettings():{};
+  const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const opsFetch=async(url,options={})=>{const r=await fetch(url,{cache:'no-store',...options});let d;try{d=await r.json()}catch(_){throw new Error('Server returned an unreadable response.')}if(!r.ok||d.ok===false)throw new Error(d.error||('HTTP '+r.status));return d;};
+  const post=(url,body)=>opsFetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+  const box=(id,html)=>{const el=$id(id);if(el)el.innerHTML=html;};
+  const status=(id,msg)=>{const el=$id(id);if(el)el.textContent=msg;};
+  const opsRefreshStatus=async()=>{try{const d=await opsFetch('/api/expansion/status');status('opsStatusBadge','ONLINE · '+d.memory_count+' MEMORIES · '+d.mcp_servers.length+' MCP');status('opsMobileStatus','Persistent data: '+d.root+'\nMCP: '+d.mcp_servers.length+' server(s)\nWorkflows: '+d.workflow_count+'\nPending code drafts: '+d.pending_code_drafts+'\nCamera: permission-based browser API\nShare/clipboard/notifications depend on browser support.');}catch(e){status('opsStatusBadge','OFFLINE');status('opsMobileStatus',e.message);}};
+
+  async function loadMemory(){
+    try{const q=$id('opsMemorySearch').value;const d=await opsFetch('/api/memory?q='+encodeURIComponent(q)+'&limit=30');
+      if(!d.memories.length){box('opsMemoryList','<div class="ops-item">No matching saved memories.</div>');return;}
+      box('opsMemoryList',d.memories.map(m=>`<div class="ops-item"><strong>${esc(m.category||'note')} · ${esc(m.created_at||'')}</strong>${esc(m.text)}<div>${(m.tags||[]).map(t=>'<span class="badge">'+esc(t)+'</span>').join(' ')} <button class="btn danger" data-memory-delete="${esc(m.id)}">Delete</button></div></div>`).join(''));
+    }catch(e){box('opsMemoryList','<div class="ops-item">'+esc(e.message)+'</div>');}
+  }
+  $id('opsMemorySave')?.addEventListener('click',async()=>{try{const text=$id('opsMemoryText').value.trim();if(!text)throw new Error('Enter a memory first.');await post('/api/memory',{text,category:'note'});$id('opsMemoryText').value='';status('opsMemoryStatus','Saved permanently on this device.');await loadMemory();await opsRefreshStatus();}catch(e){status('opsMemoryStatus',e.message);}});
+  $id('opsMemorySearch')?.addEventListener('input',()=>loadMemory());
+  $id('opsMemoryList')?.addEventListener('click',async ev=>{const b=ev.target.closest('[data-memory-delete]');if(!b)return;try{await opsFetch('/api/memory',{method:'DELETE',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:b.dataset.memoryDelete})});await loadMemory();await opsRefreshStatus();}catch(e){status('opsMemoryStatus',e.message);}});
+
+  async function loadMcp(){try{const d=await opsFetch('/api/mcp/servers');if(!d.servers.length){box('opsMcpList','<div class="ops-item">No configured MCP servers.</div>');return;}
+    box('opsMcpList',d.servers.map(s=>`<div class="ops-item"><strong>${esc(s.name)} · ${esc(s.id)}</strong>${esc(s.url)}<br>${s.tool_count} discovered tools · ${s.has_token?'token saved':'no token'}<br><button class="btn secondary" data-mcp-discover="${esc(s.id)}">Refresh tools</button><button class="btn danger" data-mcp-delete="${esc(s.id)}">Remove</button></div>`).join(''));
+  }catch(e){box('opsMcpList','<div class="ops-item">'+esc(e.message)+'</div>');}}
+  $id('opsMcpConnect')?.addEventListener('click',async()=>{try{const saved=await post('/api/mcp/servers',{name:$id('opsMcpName').value,url:$id('opsMcpUrl').value,token:$id('opsMcpToken').value});status('opsMcpStatus','Saved. Discovering tools…');const d=await post('/api/mcp/servers/'+encodeURIComponent(saved.server.id)+'/discover',{});status('opsMcpStatus',d.count+' tool(s) discovered from '+d.server+'.');$id('opsMcpToken').value='';await loadMcp();await opsRefreshStatus();}catch(e){status('opsMcpStatus',e.message);}});
+  $id('opsMcpList')?.addEventListener('click',async ev=>{const dis=ev.target.closest('[data-mcp-discover]'),del=ev.target.closest('[data-mcp-delete]');try{if(dis){const d=await post('/api/mcp/servers/'+encodeURIComponent(dis.dataset.mcpDiscover)+'/discover',{});status('opsMcpStatus',d.count+' MCP tool(s) discovered.');}if(del){await opsFetch('/api/mcp/servers/'+encodeURIComponent(del.dataset.mcpDelete),{method:'DELETE'});status('opsMcpStatus','Server removed.');}await loadMcp();await opsRefreshStatus();}catch(e){status('opsMcpStatus',e.message);}});
+
+  async function loadWorkspace(){try{const project=encodeURIComponent($id('opsProject').value||'default');const d=await opsFetch('/api/workspace/files?project='+project);box('opsWorkspaceFiles',d.files.length?d.files.map(f=>`<div class="ops-item"><strong>${esc(f.path)}</strong>${f.bytes} bytes <button class="btn secondary" data-workspace-read="${esc(f.path)}">Read</button></div>`).join(''):'<div class="ops-item">No files in this project yet.</div>');const drafts=await opsFetch('/api/workspace/drafts');box('opsWorkspaceDrafts',drafts.drafts.length?drafts.drafts.map(x=>`<div class="ops-item"><strong>Draft · ${esc(x.path)}</strong>${esc(x.validation)}<pre>${esc(x.preview||'')}</pre><button class="btn" data-workspace-apply="${esc(x.id)}">Approve & apply</button></div>`).join(''):'<div class="ops-item">No pending drafts.</div>');}catch(e){box('opsWorkspaceFiles','<div class="ops-item">'+esc(e.message)+'</div>');}}
+  $id('opsWorkspacePropose')?.addEventListener('click',async()=>{try{const d=await post('/api/workspace/propose',{project:$id('opsProject').value,path:$id('opsFilePath').value,content:$id('opsFileContent').value,reason:'User-created workspace draft'});status('opsWorkspaceFiles','Draft '+d.draft.id+' validated. Review it before applying.');await loadWorkspace();await opsRefreshStatus();}catch(e){status('opsWorkspaceFiles',e.message);}});
+  $id('opsWorkspaceRefresh')?.addEventListener('click',loadWorkspace);
+  $id('opsWorkspaceFiles')?.addEventListener('click',async ev=>{const b=ev.target.closest('[data-workspace-read]');if(!b)return;try{const u='/api/workspace/read?project='+encodeURIComponent($id('opsProject').value)+'&path='+encodeURIComponent(b.dataset.workspaceRead);const d=await opsFetch(u);$id('opsFilePath').value=d.path;$id('opsFileContent').value=d.content;}catch(e){status('opsWorkspaceFiles',e.message);}});
+  $id('opsWorkspaceDrafts')?.addEventListener('click',async ev=>{const b=ev.target.closest('[data-workspace-apply]');if(!b)return;if(!confirm('Apply this validated file draft to the workspace? A backup is created if the file already exists.'))return;try{const d=await post('/api/workspace/apply/'+encodeURIComponent(b.dataset.workspaceApply),{approved:true});status('opsWorkspaceFiles','Applied '+d.path+'. '+d.validation);await loadWorkspace();await opsRefreshStatus();}catch(e){status('opsWorkspaceFiles',e.message);}});
+
+  async function loadResearch(){try{const d=await opsFetch('/api/research/reports');box('opsResearchReports',d.reports.length?d.reports.map(r=>`<div class="ops-item"><strong>${esc(r.query)} · ${esc(r.created_at)}</strong>${esc(r.provider||'Search')} · ${(r.sources||[]).length} sources<br>${(r.sources||[]).slice(0,5).map(x=>'<a target="_blank" rel="noopener" href="'+esc(x.url)+'">'+esc(x.title||x.url)+'</a>').join('<br>')}</div>`).join(''):'<div class="ops-item">No saved research reports.</div>');}catch(e){box('opsResearchReports','<div class="ops-item">'+esc(e.message)+'</div>');}}
+  $id('opsResearchRun')?.addEventListener('click',async()=>{try{const query=$id('opsResearchQuery').value.trim();if(!query)throw new Error('Enter a research topic.');status('opsResearchStatus','Searching sources…');const d=await post('/api/research',{query,settings:settings(),max_results:8});const r=d.report;status('opsResearchStatus','Saved report · '+(r.sources||[]).length+' sources · '+r.provider);box('opsResearchReports','<div class="ops-item"><strong>'+esc(r.query)+'</strong>'+esc(r.summary||'Sources collected; no summary text returned.')+'<br>'+((r.sources||[]).map(x=>'<a target="_blank" rel="noopener" href="'+esc(x.url)+'">'+esc(x.title||x.url)+'</a>').join('<br>'))+'</div>');await loadResearch();}catch(e){status('opsResearchStatus',e.message);}});
+
+  async function loadWorkflows(){try{const d=await opsFetch('/api/automations');box('opsWorkflowList',d.workflows.length?d.workflows.map(w=>`<div class="ops-item"><strong>${esc(w.name)} · ${esc(w.id)}</strong>${w.steps.length} step(s) · ${w.interval_minutes?('every '+w.interval_minutes+' min'):'manual'}<br><button class="btn" data-workflow-run="${esc(w.id)}">Run now</button></div>`).join(''):'<div class="ops-item">No saved workflows.</div>');}catch(e){box('opsWorkflowList','<div class="ops-item">'+esc(e.message)+'</div>');}}
+  $id('opsWorkflowSave')?.addEventListener('click',async()=>{try{const steps=JSON.parse($id('opsWorkflowSteps').value);const d=await post('/api/automations',{name:$id('opsWorkflowName').value,steps,interval_minutes:Number($id('opsWorkflowInterval').value||0),enabled:true});status('opsWorkflowStatus','Saved workflow '+d.workflow.id);await loadWorkflows();await opsRefreshStatus();}catch(e){status('opsWorkflowStatus',e.message);}});
+  $id('opsWorkflowList')?.addEventListener('click',async ev=>{const b=ev.target.closest('[data-workflow-run]');if(!b)return;try{status('opsWorkflowStatus','Workflow is running…');const d=await post('/api/automations/'+encodeURIComponent(b.dataset.workflowRun)+'/run',{settings:settings()});status('opsWorkflowStatus','Completed '+d.result.results.length+' step(s).');}catch(e){status('opsWorkflowStatus',e.message);}});
+
+  // Camera: capture only on explicit user action; stop tracks when leaving Operations.
+  let cameraStream=null;
+  const stopCamera=()=>{if(cameraStream){cameraStream.getTracks().forEach(t=>t.stop());cameraStream=null;}if($id('opsCameraVideo'))$id('opsCameraVideo').classList.add('hidden');if($id('opsCameraStart'))$id('opsCameraStart').disabled=false;if($id('opsCameraCapture'))$id('opsCameraCapture').disabled=true;if($id('opsCameraStop'))$id('opsCameraStop').disabled=true;};
+  $id('opsCameraStart')?.addEventListener('click',async()=>{try{if(!navigator.mediaDevices?.getUserMedia)throw new Error('Camera access is not supported in this browser context.');cameraStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'},audio:false});const v=$id('opsCameraVideo');v.srcObject=cameraStream;v.classList.remove('hidden');$id('opsCameraStart').disabled=true;$id('opsCameraCapture').disabled=false;$id('opsCameraStop').disabled=false;status('opsVisionStatus','Camera on. Capture a frame when ready.');}catch(e){status('opsVisionStatus',e.message);stopCamera();}});
+  $id('opsCameraStop')?.addEventListener('click',()=>{stopCamera();status('opsVisionStatus','Camera stopped.');});
+  $id('opsCameraCapture')?.addEventListener('click',async()=>{try{const v=$id('opsCameraVideo'),c=$id('opsCameraCanvas');if(!v.videoWidth)throw new Error('Camera frame is not ready.');const scale=Math.min(1,960/v.videoWidth);c.width=Math.round(v.videoWidth*scale);c.height=Math.round(v.videoHeight*scale);const ctx=c.getContext('2d');ctx.drawImage(v,0,0,c.width,c.height);const data=c.toDataURL('image/jpeg',.78).split(',')[1];status('opsVisionStatus','Sending one captured frame for analysis…');const d=await post('/api/chat',{messages:[{role:'user',content:$id('opsVisionPrompt').value.trim()||'Describe the visible scene. Do not identify people.'}],settings:settings(),persona:$id('persona')?.value||'J.A.R.V.I.S.',image:{mime_type:'image/jpeg',data},web_search:false,tools_enabled:true});status('opsVisionStatus',d.reply||'Analysis complete.');}catch(e){status('opsVisionStatus',e.message);}});
+  const stopVoice=()=>{voiceActive=false;if(recognition){try{recognition.stop();}catch(_){}}recognition=null;if($id('opsVoiceStart'))$id('opsVoiceStart').disabled=false;if($id('opsVoiceStop'))$id('opsVoiceStop').disabled=true;};
+  document.querySelectorAll('.nav button[data-view]').forEach(b=>b.addEventListener('click',()=>{if(b.dataset.view!=='operations'){stopCamera();stopVoice();}}));
+
+  // Browser-level Android helpers; native system access is deliberately not assumed.
+  $id('opsShareBtn')?.addEventListener('click',async()=>{const url=location.origin+'/';try{if(navigator.share)await navigator.share({title:'J.A.R.V.I.S.',text:'Open my JARVIS assistant',url});else throw new Error('Share sheet is unavailable in this browser.');}catch(e){if(e.name!=='AbortError')status('opsMobileStatus',e.message);}});
+  $id('opsCopyBtn')?.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(location.origin+'/');status('opsMobileStatus','Local JARVIS link copied.');}catch(e){status('opsMobileStatus','Clipboard permission is unavailable.');}});
+  $id('opsNotifyBtn')?.addEventListener('click',async()=>{try{if(!('Notification' in window))throw new Error('Browser notifications are unsupported.');let permission=Notification.permission;if(permission!=='granted')permission=await Notification.requestPermission();if(permission==='granted')new Notification('J.A.R.V.I.S.',{body:'Your local assistant is running.'});else throw new Error('Notification permission was not granted.');}catch(e){status('opsMobileStatus',e.message);}});
+
+  // Continuous dictation is opt-in, browser-dependent, and never auto-starts.
+  let recognition=null, voiceActive=false;
+  const voiceCtor=window.SpeechRecognition||window.webkitSpeechRecognition;
+  $id('opsVoiceStart')?.addEventListener('click',()=>{try{if(!voiceCtor)throw new Error('Continuous speech recognition is not supported by this browser.');if(recognition)recognition.abort();recognition=new voiceCtor();recognition.lang='en-GB';recognition.continuous=true;recognition.interimResults=false;recognition.onresult=ev=>{for(let i=ev.resultIndex;i<ev.results.length;i++){if(ev.results[i].isFinal){const text=ev.results[i][0].transcript.trim();if(text){$id('messageInput').value=text;$id('messageInput').dispatchEvent(new Event('input',{bubbles:true}));$id('sendBtn').click();}}}};recognition.onerror=ev=>{status('opsVoiceStatus','Voice error: '+ev.error);if(['not-allowed','service-not-allowed','audio-capture'].includes(ev.error))stopVoice();};recognition.onend=()=>{if(voiceActive){try{recognition.start();}catch(_){}}};recognition.start();voiceActive=true;$id('opsVoiceStart').disabled=true;$id('opsVoiceStop').disabled=false;status('opsVoiceStatus','Listening. Tap Stop listening to end microphone access.');}catch(e){status('opsVoiceStatus',e.message);}});
+  $id('opsVoiceStop')?.addEventListener('click',()=>{voiceActive=false;if(recognition)recognition.stop();recognition=null;$id('opsVoiceStart').disabled=false;$id('opsVoiceStop').disabled=true;status('opsVoiceStatus','Microphone stopped.');});
+  window.addEventListener('pagehide',()=>{stopCamera();stopVoice();});
+
+  $id('opsRoutePreview')?.addEventListener('click',async()=>{try{const task=$id('opsRouteTask').value.trim();if(!task)throw new Error('Describe the task.');status('opsRouteStatus','Ranking configured providers…');const d=await post('/api/router/route-preview',{task,settings:settings(),has_image:/image|photo|picture|screenshot|camera/i.test(task)});status('opsRouteStatus','Task profile: '+d.profile.profile+' · '+d.profile.description);box('opsRouteResults',d.providers.length?d.providers.map((p,i)=>`<div class="ops-item"><strong>${i+1}. ${esc(p.name||p.id)} · ${esc(p.tier||'')}</strong>${esc(p.model||'model not set')}<br>Vision: ${p.supports_vision?'yes':'no'} · Tools: ${p.supports_tools?'yes':'no'}</div>`).join(''):'<div class="ops-item">No configured providers match this request.</div>');}catch(e){status('opsRouteStatus',e.message);}});
+
+  (async()=>{await opsRefreshStatus();await loadMemory();await loadMcp();await loadWorkspace();await loadResearch();await loadWorkflows();})();
+})();
+</script>
+
+
+<script>
+(()=>{
+  const $eco=id=>document.getElementById(id);
+  const ecoEsc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const ecoTokenKey='jarvis_ecosystem_device_token_v1';
+  const ecoLanKey='jarvis_lan_access_token_v1';
+  const ecoApi=async(path,opts={})=>{
+    const headers={...(opts.headers||{})};
+    if(opts.body && !(opts.body instanceof FormData)) headers['Content-Type']='application/json';
+    const deviceToken=localStorage.getItem(ecoTokenKey); if(deviceToken) headers['Authorization']='Bearer '+deviceToken;
+    const lanToken=localStorage.getItem(ecoLanKey); if(lanToken) headers['X-JARVIS-LAN-TOKEN']=lanToken;
+    const res=await fetch(path,{...opts,headers});
+    let data; try{data=await res.json();}catch(_){throw new Error('JARVIS returned an unreadable response.');}
+    if(!res.ok || data.ok===false) throw new Error(data.error||('Request failed: HTTP '+res.status));
+    return data;
+  };
+  const ecoMsg=(id,text)=>{const e=$eco(id);if(e)e.textContent=text;};
+  const ecoList=(id,html)=>{const e=$eco(id);if(e)e.innerHTML=html;};
+  if(!$eco('view-ecosystem')) return;
+  const workflowNodes=[];
+  function renderNodes(){
+    const root=$eco('ecoWorkflowNodes'); if(!root)return;
+    root.innerHTML=workflowNodes.length?workflowNodes.map((n,i)=>`<div class="eco-node" data-eco-node="${i}"><div class="eco-node-head"><strong>${i+1}. ${ecoEsc(n.type.replaceAll('_',' '))}</strong><button type="button" class="btn danger" data-eco-remove="${i}">Remove</button></div>${n.type==='local_tool'?`<label class="label">Tool ID</label><input class="field" data-eco-field="tool_id" value="${ecoEsc(n.tool_id||'')}" placeholder="e.g. text_word_count"><label class="label">Arguments JSON</label><textarea class="field" rows="2" data-eco-field="arguments">${ecoEsc(JSON.stringify(n.arguments||{}))}</textarea>`:`<label class="label">${n.type==='web_search'?'Search query':'Memory search query'}</label><input class="field" data-eco-field="query" value="${ecoEsc(n.query||'')}" placeholder="Enter a query…">`}</div>`).join(''):'<div class="eco-item">Add a node to begin.</div>';
+  }
+  $eco('ecoAddNode')?.addEventListener('click',()=>{const type=$eco('ecoNodeType').value;workflowNodes.push(type==='local_tool'?{type,tool_id:'',arguments:{}}:{type,query:''});renderNodes();});
+  $eco('ecoWorkflowNodes')?.addEventListener('input',ev=>{const wrap=ev.target.closest('[data-eco-node]');if(!wrap)return;const n=workflowNodes[Number(wrap.dataset.ecoNode)],f=ev.target.dataset.ecoField;if(!n||!f)return;if(f==='arguments'){try{n.arguments=JSON.parse(ev.target.value);}catch(_){n.arguments_json_invalid=true;}}else n[f]=ev.target.value;});
+  $eco('ecoWorkflowNodes')?.addEventListener('click',ev=>{const b=ev.target.closest('[data-eco-remove]');if(!b)return;workflowNodes.splice(Number(b.dataset.ecoRemove),1);renderNodes();});
+  const coreEcoPlugins=new Set(['knowledge_brain','project_versions','workflow_designer','device_network']);
+  async function loadPlugins(){try{const d=await ecoApi('/api/ecosystem/plugins');const installed=new Set(d.installed||[]);ecoList('ecoPluginsList',d.plugins.map(p=>{const on=installed.has(p.id),core=coreEcoPlugins.has(p.id);const label=core&&on?'Core':on?'Remove':'Install';return `<div class="eco-item"><strong>${ecoEsc(p.name)}</strong>${ecoEsc(p.category)} · ${ecoEsc(p.description)}<br><span>${on?'Installed':'Not installed'}</span> <button class="btn ${on?'secondary':'primary'}" data-eco-plugin="${ecoEsc(p.id)}" data-installed="${on}" data-core="${core}">${label}</button></div>`;}).join(''));ecoMsg('ecoPluginsStatus',d.plugins.length+' bundled packages');}catch(e){ecoMsg('ecoPluginsStatus',e.message);}}
+  $eco('ecoPluginsRefresh')?.addEventListener('click',loadPlugins);
+  $eco('ecoPluginsList')?.addEventListener('click',async ev=>{const b=ev.target.closest('[data-eco-plugin]');if(!b)return;try{const id=b.dataset.ecoPlugin;if(b.dataset.installed==='true'){if(b.dataset.core==='true')return;await ecoApi('/api/ecosystem/plugins/'+encodeURIComponent(id),{method:'DELETE'});ecoMsg('ecoPluginsStatus','Removed '+id);}else{await ecoApi('/api/ecosystem/plugins/install',{method:'POST',body:JSON.stringify({id})});ecoMsg('ecoPluginsStatus','Installed '+id);}await loadPlugins();}catch(e){ecoMsg('ecoPluginsStatus',e.message);}});
+  async function loadEcoWorkflows(){try{const d=await ecoApi('/api/ecosystem/workflows');ecoList('ecoWorkflowList',(d.workflows||[]).map(w=>`<div class="eco-item"><strong>${ecoEsc(w.name||'Workflow')}</strong>${(w.steps||[]).length} node(s) · ${w.interval_minutes?'Every '+w.interval_minutes+' min':'Manual'}<br><button class="btn secondary" data-eco-run-workflow="${ecoEsc(w.id)}">Run now</button></div>`).join('')||'<div class="eco-item">No saved workflows.</div>');}catch(e){ecoMsg('ecoWorkflowStatus',e.message);}}
+  $eco('ecoWorkflowSave')?.addEventListener('click',async()=>{try{if(!workflowNodes.length)throw new Error('Add at least one workflow node.');if(workflowNodes.some(n=>n.arguments_json_invalid))throw new Error('Fix the local-tool arguments JSON before saving.');const d=await ecoApi('/api/ecosystem/workflow/design',{method:'POST',body:JSON.stringify({name:$eco('ecoWorkflowName').value,steps:workflowNodes,enabled:true,interval_minutes:0})});ecoMsg('ecoWorkflowStatus','Saved '+d.workflow.id);await loadEcoWorkflows();}catch(e){ecoMsg('ecoWorkflowStatus',e.message);}});
+  $eco('ecoWorkflowRefresh')?.addEventListener('click',loadEcoWorkflows);
+  $eco('ecoWorkflowList')?.addEventListener('click',async ev=>{const b=ev.target.closest('[data-eco-run-workflow]');if(!b)return;try{ecoMsg('ecoWorkflowStatus','Running workflow…');const d=await ecoApi('/api/ecosystem/workflow/'+encodeURIComponent(b.dataset.ecoRunWorkflow)+'/run',{method:'POST',body:JSON.stringify({settings:{}})});ecoMsg('ecoWorkflowStatus','Completed '+((d.result?.results||[]).length)+' node(s).');}catch(e){ecoMsg('ecoWorkflowStatus',e.message);}});
+  async function loadProjectHistory(){try{const p=encodeURIComponent($eco('ecoProjectName').value.trim()||'default');const d=await ecoApi('/api/ecosystem/projects/'+p+'/history');ecoList('ecoProjectHistory',(d.snapshots||[]).map(s=>`<div class="eco-item"><strong>${ecoEsc(s.id)}</strong>${ecoEsc(s.created_at)} · ${(s.size/1024).toFixed(1)} KB<br><button class="btn secondary" data-eco-restore="${ecoEsc(s.id)}">Restore snapshot</button></div>`).join('')||'<div class="eco-item">No snapshots yet.</div>');if(d.git_available)ecoMsg('ecoProjectDiff','Git '+(d.git_initialized?'repository found':'available; no repository initialized')+(d.git_log?.length?'\n'+d.git_log.join('\n'):''));}catch(e){ecoMsg('ecoProjectDiff',e.message);}}
+  $eco('ecoSnapshotCreate')?.addEventListener('click',async()=>{try{const p=encodeURIComponent($eco('ecoProjectName').value.trim()||'default');const d=await ecoApi('/api/ecosystem/projects/'+p+'/snapshot',{method:'POST',body:JSON.stringify({note:'Created from JARVIS Ecosystem'} )});ecoMsg('ecoProjectDiff','Created snapshot '+d.id+' with '+d.file_count+' files.');await loadProjectHistory();}catch(e){ecoMsg('ecoProjectDiff',e.message);}});
+  $eco('ecoProjectRefresh')?.addEventListener('click',loadProjectHistory);
+  $eco('ecoProjectCompare')?.addEventListener('click',async()=>{try{const p=encodeURIComponent($eco('ecoProjectName').value.trim()||'default');const d=await ecoApi('/api/ecosystem/projects/'+p+'/compare',{method:'POST',body:JSON.stringify({})});ecoMsg('ecoProjectDiff',d.diff||'No differences.');}catch(e){ecoMsg('ecoProjectDiff',e.message);}});
+  $eco('ecoProjectHistory')?.addEventListener('click',async ev=>{const b=ev.target.closest('[data-eco-restore]');if(!b)return;if(!confirm('Restore this snapshot? JARVIS will create a pre-restore backup first.'))return;try{const p=encodeURIComponent($eco('ecoProjectName').value.trim()||'default');const d=await ecoApi('/api/ecosystem/projects/'+p+'/restore',{method:'POST',body:JSON.stringify({snapshot_id:b.dataset.ecoRestore})});ecoMsg('ecoProjectDiff','Restored '+d.restored+'. Backup before restore: '+d.pre_restore_backup);await loadProjectHistory();}catch(e){ecoMsg('ecoProjectDiff',e.message);}});
+  async function loadKnowledge(){try{const d=await ecoApi('/api/ecosystem/knowledge');ecoList('ecoKnowledgeList',(d.documents||[]).map(x=>`<div class="eco-item"><strong>${ecoEsc(x.title)}</strong>${ecoEsc(x.source||'local')} · ${x.char_count||0} chars · ${x.chunk_count||0} chunks<br><button class="btn danger" data-eco-delete-doc="${ecoEsc(x.id)}">Delete</button></div>`).join('')||'<div class="eco-item">No documents imported.</div>');}catch(e){ecoMsg('ecoKnowledgeStatus',e.message);}}
+  $eco('ecoKnowledgeAdd')?.addEventListener('click',async()=>{try{const text=$eco('ecoKnowledgeText').value.trim();if(!text)throw new Error('Enter notes first.');const d=await ecoApi('/api/ecosystem/knowledge',{method:'POST',body:JSON.stringify({title:$eco('ecoKnowledgeTitle').value||'Untitled note',text,source:'manual'})});ecoMsg('ecoKnowledgeStatus','Saved '+d.document.title);$eco('ecoKnowledgeText').value='';await loadKnowledge();}catch(e){ecoMsg('ecoKnowledgeStatus',e.message);}});
+  $eco('ecoKnowledgeFile')?.addEventListener('change',async ev=>{const f=ev.target.files?.[0];if(!f)return;try{const fd=new FormData();fd.append('file',f);const d=await ecoApi('/api/ecosystem/knowledge/upload',{method:'POST',body:fd});ecoMsg('ecoKnowledgeStatus','Imported '+d.document.title);await loadKnowledge();}catch(e){ecoMsg('ecoKnowledgeStatus',e.message);}finally{ev.target.value='';}});
+  $eco('ecoKnowledgeSearch')?.addEventListener('click',async()=>{try{const q=$eco('ecoKnowledgeQuery').value.trim();if(!q)throw new Error('Enter a search phrase.');const d=await ecoApi('/api/ecosystem/knowledge/search?q='+encodeURIComponent(q));ecoList('ecoKnowledgeResults',(d.results||[]).map(r=>`<div class="eco-item"><strong>${ecoEsc(r.title)} · score ${r.score}</strong>${ecoEsc(r.text)}</div>`).join('')||'<div class="eco-item">No matching passages.</div>');}catch(e){ecoMsg('ecoKnowledgeStatus',e.message);}});
+  $eco('ecoKnowledgeRefresh')?.addEventListener('click',loadKnowledge);
+  $eco('ecoKnowledgeList')?.addEventListener('click',async ev=>{const b=ev.target.closest('[data-eco-delete-doc]');if(!b)return;if(!confirm('Delete this saved knowledge document?'))return;try{await ecoApi('/api/ecosystem/knowledge/'+encodeURIComponent(b.dataset.ecoDeleteDoc),{method:'DELETE'});await loadKnowledge();ecoMsg('ecoKnowledgeStatus','Document deleted.');}catch(e){ecoMsg('ecoKnowledgeStatus',e.message);}});
+  if($eco('ecoLanToken'))$eco('ecoLanToken').value=localStorage.getItem(ecoLanKey)||'';
+  $eco('ecoLanTokenSave')?.addEventListener('click',async()=>{const t=$eco('ecoLanToken').value.trim();if(t.length<32){ecoMsg('ecoLanTokenStatus','Token is too short. Copy the full token file contents.');return;}localStorage.setItem(ecoLanKey,t);ecoMsg('ecoLanTokenStatus','Saved in this browser. Reloading JARVIS with LAN access…');setTimeout(()=>location.reload(),350);});
+  $eco('ecoLanTokenClear')?.addEventListener('click',()=>{localStorage.removeItem(ecoLanKey);$eco('ecoLanToken').value='';ecoMsg('ecoLanTokenStatus','LAN token cleared from this browser.');});
+  $eco('ecoPairGenerate')?.addEventListener('click',async()=>{try{const d=await ecoApi('/api/ecosystem/devices/pair-code',{method:'POST',body:'{}'});ecoMsg('ecoPairCode',d.code);ecoMsg('ecoPairHint','One-time code · expires in '+d.expires_in_seconds+' seconds.');}catch(e){ecoMsg('ecoPairHint',e.message);}});
+  $eco('ecoDeviceJoin')?.addEventListener('click',async()=>{try{const d=await ecoApi('/api/ecosystem/devices/join',{method:'POST',body:JSON.stringify({code:$eco('ecoJoinCode').value,name:$eco('ecoDeviceName').value})});localStorage.setItem(ecoTokenKey,d.device_token);ecoMsg('ecoDeviceStatus','Paired. Device token saved in this browser profile.');await loadDevices();}catch(e){ecoMsg('ecoDeviceStatus',e.message);}});
+  async function loadDevices(){try{const d=await ecoApi('/api/ecosystem/devices');ecoList('ecoDevicesList',(d.devices||[]).map(x=>`<div class="eco-item"><strong>${ecoEsc(x.name)}</strong>${ecoEsc(x.id)} · last seen ${ecoEsc(x.last_seen||'unknown')}</div>`).join('')||'<div class="eco-item">No paired devices.</div>');$eco('ecoDeviceTarget').innerHTML='<option value="">Choose device</option>'+(d.devices||[]).map(x=>`<option value="${ecoEsc(x.id)}">${ecoEsc(x.name)}</option>`).join('');}catch(e){ecoMsg('ecoDeviceStatus',e.message);}}
+  $eco('ecoDevicesRefresh')?.addEventListener('click',loadDevices);
+  $eco('ecoDeviceSend')?.addEventListener('click',async()=>{try{const to=$eco('ecoDeviceTarget').value,text=$eco('ecoDeviceMessage').value.trim();if(!to||!text)throw new Error('Choose a device and enter a message.');await ecoApi('/api/ecosystem/devices/send',{method:'POST',body:JSON.stringify({to,text})});ecoMsg('ecoDeviceStatus','Message queued.');$eco('ecoDeviceMessage').value='';}catch(e){ecoMsg('ecoDeviceStatus',e.message);}});
+  $eco('ecoDeviceInbox')?.addEventListener('click',async()=>{try{const d=await ecoApi('/api/ecosystem/devices/inbox');ecoList('ecoDeviceMessages',(d.messages||[]).map(m=>`<div class="eco-item"><strong>From ${ecoEsc(m.from_name||m.from)}</strong>${ecoEsc(m.text)}<br>${ecoEsc(m.created_at)}</div>`).join('')||'<div class="eco-item">No unread messages.</div>');}catch(e){ecoMsg('ecoDeviceStatus',e.message);}});
+  const ecoNav=document.querySelector('.nav button[data-view="ecosystem"]');ecoNav?.addEventListener('click',()=>{loadPlugins();loadEcoWorkflows();loadProjectHistory();loadKnowledge();loadDevices();});
+  (async()=>{try{const d=await ecoApi('/api/ecosystem/status');ecoMsg('ecoStatusBadge','ONLINE · '+d.version);await loadPlugins();await loadEcoWorkflows();await loadProjectHistory();await loadKnowledge();await loadDevices();}catch(e){ecoMsg('ecoStatusBadge','OFFLINE');}})();
+})();
+</script>
+
+
+<script>
+(()=>{
+  const $=id=>document.getElementById(id);
+  const token=()=>String($('bdfdBridgeToken')?.value||'').trim();
+  const setStatus=(id,msg)=>{const el=$(id);if(el)el.textContent=msg;};
+  async function copyText(value,label){
+    if(!value){setStatus('bdfdTokenStatus','Nothing to copy yet.');return;}
+    try{await navigator.clipboard.writeText(value);setStatus('bdfdTokenStatus',label+' copied.');}
+    catch(_){const el=$('bdfdAskCode');if(el){el.focus();el.select();setStatus('bdfdBuildStatus','Clipboard unavailable. Text selected; copy it manually.');}}
+  }
+  async function loadBridgeSettings(){
+    try{
+      const r=await fetch('/api/bdfd/settings',{cache:'no-store'});const d=await r.json();
+      if(!r.ok||!d.ok)throw new Error(d.error||('HTTP '+r.status));
+      $('bdfdBridgeToken').value=d.token||'';
+      setStatus('bdfdTokenPath','Saved token file: '+d.token_file+'\nPersistent root: '+d.persistent_root+(d.public_storage?'\nThis folder should be visible in Android shared storage.':'\nAndroid shared storage was not writable; this token is in Pydroid app-private storage. Use the Show/Copy buttons here.'));
+      setStatus('bdfdTokenStatus','Token loaded. Keep it private.');
+      buildCommands();
+    }catch(e){setStatus('bdfdTokenStatus','Could not load token: '+e.message);setStatus('bdfdTokenPath','Open this page on the same phone at http://127.0.0.1:8765. Token reveal is intentionally restricted to localhost.');}
+  }
+  function normalizedHost(){return String($('bdfdPublicHost')?.value||'').trim().replace(/\/+$/,'');}
+  function buildCommands(){
+    const t=token(),host=normalizedHost();
+    if(!t){setStatus('bdfdBuildStatus','Bridge token has not loaded.');return false;}
+    if(!/^https:\/\//i.test(host)){setStatus('bdfdBuildStatus','Enter a valid HTTPS address. BDFD cannot reach localhost.');return false;}
+    const ask=`$nomention
+$httpAddHeader[Authorization;Bearer ${t}]
+$httpAddHeader[Content-Type;application/x-www-form-urlencoded]
+$httpPost[${host}/api/bdfd/chat;message=$url[encode;$message]&author_id=$authorID&author_name=$url[encode;$username]&channel_id=$channelID&guild_id=$guildID&session_id=$authorID&persona=J.A.R.V.I.S.]
+$onlyIf[$httpStatus==200;JARVIS bridge error. HTTP $httpStatus]
+$sendMessage[$httpResult[reply];false]`;
+    const poll=`$nomention
+$httpAddHeader[Authorization;Bearer ${t}]
+$httpGet[${host}/api/bdfd/outbox/next?channel_id=$channelID]
+$onlyIf[$httpStatus==200;JARVIS outbox error. HTTP $httpStatus]
+$onlyIf[$httpResult[has_message]==true;No JARVIS messages are waiting for this channel.]
+$var[jarvis_message_id;$httpResult[id]]
+$sendMessage[$httpResult[content];false]
+$httpAddHeader[Authorization;Bearer ${t}]
+$httpAddHeader[Content-Type;application/x-www-form-urlencoded]
+$httpPost[${host}/api/bdfd/outbox/ack;id=$url[encode;$var[jarvis_message_id]]&channel_id=$channelID]`;
+    const status=`$nomention
+$httpAddHeader[Authorization;Bearer ${t}]
+$httpGet[${host}/api/bdfd/health]
+$onlyIf[$httpStatus==200;JARVIS bridge is offline or unreachable.]
+JARVIS bridge is online. Version: $httpResult[version]`;
+    $('bdfdAskCode').value=ask;$('bdfdPollCode').value=poll;$('bdfdStatusCode').value=status;
+    setStatus('bdfdBuildStatus','BDScript 2 commands generated. Copy each into a separate BDFD custom command.');
+    return true;
+  }
+  $('bdfdRevealToken')?.addEventListener('click',()=>{$('bdfdBridgeToken').type=$('bdfdBridgeToken').type==='password'?'text':'password';$('bdfdRevealToken').textContent=$('bdfdBridgeToken').type==='password'?'Show token':'Hide token';});
+  $('bdfdCopyToken')?.addEventListener('click',()=>copyText(token(),'Bridge token'));
+  $('bdfdBuildCommands')?.addEventListener('click',buildCommands);
+  $('bdfdPublicHost')?.addEventListener('input',()=>{if(token())buildCommands();});
+  $('bdfdCopyAskCode')?.addEventListener('click',()=>copyText($('bdfdAskCode').value,'!askjarvis code'));
+  $('bdfdCopyPollCode')?.addEventListener('click',()=>copyText($('bdfdPollCode').value,'!jarvispoll code'));
+  $('bdfdCopyStatusCode')?.addEventListener('click',()=>copyText($('bdfdStatusCode').value,'!jarvisstatus code'));
+  $('bdfdTestBridge')?.addEventListener('click',async()=>{
+    const t=token();if(!t){setStatus('bdfdHealthStatus','Token unavailable. Reload this page on localhost.');return;}
+    setStatus('bdfdHealthStatus','Testing authenticated connection…');
+    try{const r=await fetch('/api/bdfd/health',{headers:{Authorization:'Bearer '+t},cache:'no-store'});const d=await r.json();if(!r.ok||!d.ok)throw new Error(d.error||('HTTP '+r.status));setStatus('bdfdHealthStatus','Connected · '+d.service+' · v'+d.version);}
+    catch(e){setStatus('bdfdHealthStatus','Failed: '+e.message);}
+  });
+  $('bdfdRotateToken')?.addEventListener('click',async()=>{
+    if(!confirm('Regenerate the BDFD token? Your old BDFD commands will stop working until you paste the new token.'))return;
+    setStatus('bdfdTokenStatus','Regenerating token…');
+    try{const r=await fetch('/api/bdfd/token/rotate',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'});const d=await r.json();if(!r.ok||!d.ok)throw new Error(d.error||('HTTP '+r.status));$('bdfdBridgeToken').value=d.token;setStatus('bdfdTokenPath','Saved token file: '+d.token_file);setStatus('bdfdTokenStatus','New token created. Update your BDFD commands.');buildCommands();}
+    catch(e){setStatus('bdfdTokenStatus','Rotation failed: '+e.message);}
+  });
+  loadBridgeSettings();
+})();
+</script>
+
+</body>
+</html>

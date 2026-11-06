@@ -1,0 +1,10 @@
+J.A.R.V.I.S. v2.5.3 — Render Edition
+
+- Render-compatible WSGI/Gunicorn entry point.
+- Automatically binds to Render's PORT on 0.0.0.0.
+- Public API is restricted to authenticated BDFD endpoints plus /healthz.
+- BDFD bridge token is supplied through JARVIS_BDFD_TOKEN.
+- AI provider credentials/model are configured by Render environment variables.
+- Existing JARVIS BDFD chat, conversation, and outbox routes are reused.
+- Dashboard, settings, Omni Router, and admin/self-upgrade endpoints are blocked.
+- No secrets are embedded in source files.

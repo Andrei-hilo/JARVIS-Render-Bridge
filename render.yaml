@@ -1,0 +1,27 @@
+services:
+  - type: web
+    name: jarvis-bdfd-api
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn render_service:app --bind 0.0.0.0:$PORT --workers 1 --threads 4 --timeout 180 --access-logfile -
+    healthCheckPath: /healthz
+    envVars:
+      - key: JARVIS_BDFD_TOKEN
+        generateValue: true
+      - key: JARVIS_PROVIDER_API_KEY
+        sync: false
+      - key: JARVIS_PROVIDER_MODEL
+        sync: false
+      - key: JARVIS_PROVIDER_BASE_URL
+        value: https://openrouter.ai/api/v1
+      - key: JARVIS_PROVIDER_NAME
+        value: OpenRouter
+      - key: JARVIS_PROVIDER_ID
+        value: openrouter
+      - key: JARVIS_PROVIDER_KIND
+        value: openai
+      - key: JARVIS_PERSISTENT_DIR
+        value: /tmp/jarvis-persistent
+      - key: JARVIS_GATEWAY_DIR
+        value: /tmp/jarvis-gateway
